@@ -20,50 +20,6 @@
 		overflow: hidden;
 
 		animation: fadeIn 0.3s ease-in;
-
-		.word {
-			display: flex;
-			font-size: 25px;
-
-			.cursor {
-				display: inline-block;
-				background: lime;
-				line-height: 20px;
-
-				margin-top: 1px;
-
-				-webkit-animation: blink 1s infinite;
-				width: 1px;
-				height: 25px;
-				margin-right: -1px;
-
-				@-webkit-keyframes blink {
-					0% {
-						background: transparent;
-					}
-					50% {
-						background: #fff;
-					}
-					100% {
-						background: transparent;
-					}
-				}
-			}
-
-			.letter {
-				&.gray {
-					color: #4c4c4c;
-				}
-
-				&.green {
-					color: #c7c7c7;
-				}
-
-				&.red {
-					color: red;
-				}
-			}
-		}
 	}
 }
 

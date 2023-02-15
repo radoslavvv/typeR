@@ -1,20 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LetterColor from "../enums/LetterColor";
-import Letter from "../models/Letter";
+import WordsHelper from "../helpers/WordsHelper";
 import Word from "../models/Word";
 
 const useWriter = (
 	timerIsStarted: boolean,
 	setTimerIsStarted: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-	const [writtenText, setWrittenText] = useState<string>("");
-	const [charsTyped, setCharsTyped] = useState<number>(0);
 	const [shiftIsPressed, setShiftIsPressed] = useState<boolean>(false);
-
 	const [words, setWords] = useState<Word[]>([]);
-
 	const [wordIndex, setWordIndex] = useState<number>(0);
 	const [letterIndex, setLetterIndex] = useState<number>(0);
+	
+	useEffect(() => {
+		const generatedWords = WordsHelper.getRandomWords();
+		setWords(generatedWords);
+	}, []);
 
 	const updateLetterColor = (
 		color: LetterColor,
@@ -43,10 +44,6 @@ const useWriter = (
 			return;
 		}
 
-		setWrittenText((prev: string) => {
-			return prev.substring(0, prev.length - 1);
-		});
-
 		updateLetterColor(LetterColor.Gray, letterIndex - 1);
 
 		setLetterIndex((prev: number) => {
@@ -59,7 +56,7 @@ const useWriter = (
 			const newWords = [...prev];
 			newWords[wordIndex]?.letters?.map((l: any) => {
 				if (l.color === LetterColor.Gray) {
-					l.value = LetterColor.Red;
+					l.color = LetterColor.Red;
 				}
 
 				return l;
@@ -80,16 +77,6 @@ const useWriter = (
 		if (shiftIsPressed) {
 			pressedKey = pressedKey.toUpperCase();
 		}
-
-		setCharsTyped((prev: number) => prev + 1);
-
-		setWrittenText((prev: string) => {
-			const newWrittenText: string = prev + pressedKey;
-			return newWrittenText.substring(
-				0,
-				words[wordIndex]?.letters?.length
-			);
-		});
 
 		if (words[wordIndex]?.letters[letterIndex]?.key === pressedKey) {
 			updateLetterColor(LetterColor.Green);
@@ -138,7 +125,6 @@ const useWriter = (
 
 	return {
 		words,
-		setWords,
 		wordIndex,
 		letterIndex,
 		handleKeyUp,
