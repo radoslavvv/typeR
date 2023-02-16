@@ -17,31 +17,28 @@ interface IWriterProps {
 }
 
 const Writer = (props: IWriterProps) => {
-	const {
-		words,
-		wordIndex,
-		letterIndex,
-		handleKeyUp,
-		handleKeyDown,
-	} = useWriter(props.timerIsStarted, props.setTimerIsStarted);
+	const { words, wordIndex, letterIndex, handleKeyUp, handleKeyDown } =
+		useWriter(props.timerIsStarted, props.setTimerIsStarted);
 
 	const wordsPage = usePagedWords(words, wordIndex);
 
 	useGlobalKeyEvents(handleKeyUp, handleKeyDown);
-	
+
 	return (
 		<div className={styles.writerContainer}>
 			<div className={styles.wordsList}>
 				{wordsPage?.length &&
-					wordsPage
-						.map((word: Word, wi: number) => (
-							<WriterWord 
-								key={wi} 
-								isCurrentWord={wi === wordIndex} 
-								letterIndex={letterIndex}
-								word={word}
-								isLastLetter={letterIndex === words[wordIndex].letters.length}/>
-						))}
+					wordsPage.map((word: Word, wi: number) => (
+						<WriterWord
+							key={wi}
+							isCurrentWord={wi === wordIndex}
+							letterIndex={letterIndex}
+							word={word}
+							isLastLetter={
+								letterIndex === words[wordIndex].letters.length
+							}
+						/>
+					))}
 			</div>
 		</div>
 	);

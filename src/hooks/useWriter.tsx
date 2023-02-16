@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import LetterColor from "../enums/LetterColor";
-import WordsHelper from "../helpers/WordsHelper";
 import Word from "../models/Word";
+import { getRandomWords } from "../services/WordsService";
 
 const useWriter = (
 	timerIsStarted: boolean,
@@ -11,9 +11,9 @@ const useWriter = (
 	const [words, setWords] = useState<Word[]>([]);
 	const [wordIndex, setWordIndex] = useState<number>(0);
 	const [letterIndex, setLetterIndex] = useState<number>(0);
-	
+
 	useEffect(() => {
-		const generatedWords = WordsHelper.getRandomWords();
+		const generatedWords = getRandomWords();
 		setWords(generatedWords);
 	}, []);
 

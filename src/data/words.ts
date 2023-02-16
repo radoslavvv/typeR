@@ -1,4 +1,4 @@
-const words = ['a',
+const words = [
 'ability',
 'able',
 'about',
