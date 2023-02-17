@@ -1,6 +1,7 @@
 import words from "../data/words";
 import Letter from "../models/Letter";
 import Word from "../models/Word";
+import { WORDS_PER_PAGE } from "../utils/constants";
 
 const generateRandomWordsArray = (): string[] => {
 	let selectedWords: string[] = [];
@@ -38,5 +39,12 @@ const getRandomWords = (): Word[] => {
 
 	return formattedWords;
 };
+
+const getNextPageWords = (allWords: Word[], wordIndex: number): Word[] => {
+	const startIndex: number = wordIndex + 1;
+	const endIndex: number = startIndex + WORDS_PER_PAGE;
+	
+	return allWords.slice(startIndex, endIndex);
+} 
 
 export {generateRandomWordsArray, getRandomWords, formatWords}

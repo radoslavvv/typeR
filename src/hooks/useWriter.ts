@@ -2,25 +2,35 @@ import { useEffect, useState } from "react";
 import LetterColor from "../enums/LetterColor";
 import Word from "../models/Word";
 import { getRandomWords } from "../services/WordsService";
+import { WORDS_PER_PAGE } from "../utils/constants";
+import useStatitstics from "./useStatistics";
 
 const useWriter = (
 	timerIsStarted: boolean,
 	setTimerIsStarted: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-	const [shiftIsPressed, setShiftIsPressed] = useState<boolean>(false);
+	const [allWords, setAllWords] = useState<Word[]>([]);
 	const [words, setWords] = useState<Word[]>([]);
+	
 	const [wordIndex, setWordIndex] = useState<number>(0);
 	const [letterIndex, setLetterIndex] = useState<number>(0);
+	const [wordsPage, setWordsPage] = useState<number>(0);
+
+	const [shiftIsPressed, setShiftIsPressed] = useState<boolean>(false);
+
+	const {setKeyStrokes, setCorrectKeyStrokes} = useStatitstics();
 
 	useEffect(() => {
 		const generatedWords = getRandomWords();
-		setWords(generatedWords);
+		setAllWords(generatedWords);
+		setWords([...generatedWords.slice(0, WORDS_PER_PAGE)])
 	}, []);
 
 	const updateLetterColor = (
 		color: LetterColor,
 		index: number = letterIndex
 	): void => {
+
 		setWords((prev: Word[]) => {
 			const newWords: Word[] = [...prev];
 			newWords[wordIndex].letters[index] = {
@@ -51,7 +61,25 @@ const useWriter = (
 		});
 	};
 
+	const moveToNextPage = (): void => {
+		const startIndex: number = (WORDS_PER_PAGE * wordsPage) + wordIndex + 1;
+		const endIndex: number = startIndex + WORDS_PER_PAGE;
+
+		setWords([...allWords.slice(startIndex, endIndex)])
+		
+		setWordIndex(0);
+		setLetterIndex(0);
+		setWordsPage((prev: number) => {
+			return prev +1;
+		})
+	};
+
 	const moveToNextWord = (): void => {
+		if(wordIndex + 1 === words.length) {
+			moveToNextPage();
+			return;
+		}
+
 		setWords((prev) => {
 			const newWords = [...prev];
 			newWords[wordIndex]?.letters?.map((l: any) => {
@@ -112,6 +140,10 @@ const useWriter = (
 			return;
 		}
 
+		setKeyStrokes((prev: number) => {
+			return prev + 1;
+		})
+
 		inputLetter(pressedKey);
 	};
 
@@ -126,7 +158,9 @@ const useWriter = (
 	return {
 		words,
 		wordIndex,
+		setWordIndex,
 		letterIndex,
+		setLetterIndex,
 		handleKeyUp,
 		handleKeyDown,
 	};
