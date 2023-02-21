@@ -1,9 +1,15 @@
-import {configureStore} from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import testReducer from './features/testSlice';
+import timerReducer from "./features/timer/timerSlice";
+import writerReducer from "./features/writer/writerSlice";
 
 export const store = configureStore({
-    reducer: {
-        test: testReducer
-    }
+	reducer: {
+		timer: timerReducer,
+		writer: writerReducer,
+	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: false,
+		}),
 });

@@ -1,28 +1,25 @@
-import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useGlobalKeyEvents } from "../../hooks/useGlobalKeyEvents";
-import usePagedWords from "../../hooks/usePagedWords";
-import useStatistics from "../../hooks/useStatistics";
-import useWriter from "../../hooks/useWriter";
-
-import Word from "../../models/Word";
 
 import { WriterWord } from "../writerWord/WriterWord";
 
+import useWriter from "../../hooks/useWriter";
+import { useGlobalKeyEvents } from "../../hooks/useGlobalKeyEvents";
+
+import Word from "../../models/Word";
+
 import styles from "./Writer.module.scss";
 
-interface IWriterProps {
-	timerIsStarted: boolean;
-	setTimerIsStarted: React.Dispatch<React.SetStateAction<boolean>>;
-}
+interface IWriterProps {}
 
 const Writer = (props: IWriterProps) => {
-	const { words, wordIndex, letterIndex, handleKeyUp, handleKeyDown } =
-		useWriter(props.timerIsStarted, props.setTimerIsStarted);
+	const { words, wordIndex, letterIndex } = useSelector(
+		(state: any) => state.writer
+	);
+
+	const { handleKeyUp, handleKeyDown } = useWriter();
 
 	useGlobalKeyEvents(handleKeyUp, handleKeyDown);
 
-	// const { keyStrokes } = useStatistics();
 	return (
 		<div className={styles.writerContainer}>
 			<div className={styles.wordsList}>
