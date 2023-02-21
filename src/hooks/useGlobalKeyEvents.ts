@@ -1,9 +1,12 @@
 import { useEffect } from "react";
 
-type KeyboardEventHandler = (this: Window, ev: KeyboardEvent) => any
+type KeyboardEventHandler = (this: Window, ev: KeyboardEvent) => any;
 
-export const useGlobalKeyEvents = (handleKeyUp: KeyboardEventHandler, handleKeyDown: KeyboardEventHandler) => {
-    useEffect(() => {
+const useGlobalKeyEvents = (
+	handleKeyUp: KeyboardEventHandler,
+	handleKeyDown: KeyboardEventHandler
+) => {
+	useEffect(() => {
 		window.addEventListener("keyup", handleKeyUp);
 		window.addEventListener("keydown", handleKeyDown);
 
@@ -12,4 +15,6 @@ export const useGlobalKeyEvents = (handleKeyUp: KeyboardEventHandler, handleKeyD
 			window.removeEventListener("keydown", handleKeyDown);
 		};
 	}, [handleKeyUp, handleKeyDown]);
-}
+};
+
+export default useGlobalKeyEvents;

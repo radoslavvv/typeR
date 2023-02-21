@@ -1,37 +1,42 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface TimerState {
-	isStarted: boolean;
-	isDone: boolean;
+	timerIsStarted: boolean;
+	timerIsDone: boolean;
 
-	time: number;
+	timerTime: number;
 }
 
 const initialState: TimerState = {
-	isStarted: false,
-	isDone: false,
+	timerIsStarted: false,
+	timerIsDone: false,
 
-	time: 10,
+	timerTime: 0,
 };
 
 export const timerSlice = createSlice({
 	name: "timer",
 	initialState,
 	reducers: {
+		setTimerTime: (state, action: PayloadAction<number>) => {
+			state.timerTime = action.payload;
+		},
+
 		startTimer: (state) => {
-			state.isStarted = true;
-			state.isDone = false;
+			state.timerIsStarted = true;
+			state.timerIsDone = false;
 		},
 		stopTimer: (state) => {
-			state.isStarted = false;
-			state.isDone = true;
+			state.timerIsStarted = false;
+			state.timerIsDone = true;
 		},
 		updateTime: (state) => {
-			state.time -= 1;
+			state.timerTime -= 1;
 		},
 	},
 });
 
-export const { startTimer, stopTimer, updateTime } = timerSlice.actions;
+export const { startTimer, stopTimer, updateTime, setTimerTime } =
+	timerSlice.actions;
 
 export default timerSlice.reducer;

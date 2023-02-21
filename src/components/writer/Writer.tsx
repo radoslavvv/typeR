@@ -3,16 +3,16 @@ import { useSelector } from "react-redux";
 import { WriterWord } from "../writerWord/WriterWord";
 
 import useWriter from "../../hooks/useWriter";
-import { useGlobalKeyEvents } from "../../hooks/useGlobalKeyEvents";
 
 import Word from "../../models/Word";
 
 import styles from "./Writer.module.scss";
+import useGlobalKeyEvents from "../../hooks/useGlobalKeyEvents";
 
 interface IWriterProps {}
 
 const Writer = (props: IWriterProps) => {
-	const { words, wordIndex, letterIndex } = useSelector(
+	const { currentVisibleWords, wordIndex, letterIndex } = useSelector(
 		(state: any) => state.writer
 	);
 
@@ -23,15 +23,16 @@ const Writer = (props: IWriterProps) => {
 	return (
 		<div className={styles.writerContainer}>
 			<div className={styles.wordsList}>
-				{words?.length &&
-					words.map((word: Word, wi: number) => (
+				{currentVisibleWords?.length &&
+					currentVisibleWords.map((word: Word, wi: number) => (
 						<WriterWord
 							key={wi}
 							isCurrentWord={wi === wordIndex}
 							letterIndex={letterIndex}
 							word={word}
 							isLastLetter={
-								letterIndex === words[wordIndex].letters.length
+								letterIndex ===
+								currentVisibleWords[wordIndex].letters.length
 							}
 						/>
 					))}

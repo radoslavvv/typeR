@@ -40,11 +40,4 @@ const getRandomWords = (): Word[] => {
 	return formattedWords;
 };
 
-const getNextPageWords = (allWords: Word[], wordIndex: number): Word[] => {
-	const startIndex: number = wordIndex + 1;
-	const endIndex: number = startIndex + WORDS_PER_PAGE;
-	
-	return allWords.slice(startIndex, endIndex);
-} 
-
-export {generateRandomWordsArray, getRandomWords, formatWords}
+export { generateRandomWordsArray, getRandomWords, formatWords };

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import LetterColor from "../enums/LetterColor";
+
 import { startTimer } from "../redux/features/timer/timerSlice";
 import {
 	deleteCurrentLetter,
@@ -9,34 +9,32 @@ import {
 	moveToNextWord,
 	setAllWords,
 	setShiftIsPressed,
-	setWords,
-	updateCurrentLetterColor,
+	setCurrentLetterColor,
 } from "../redux/features/writer/writerSlice";
+
+import LetterColor from "../enums/LetterColor";
+
 import { getRandomWords } from "../services/WordsService";
-import { WORDS_PER_PAGE } from "../utils/constants";
 
 const useWriter = () => {
 	const dispatch = useDispatch();
-	const { isStarted } = useSelector((state: any) => state.timer);
+	const { timerIsStarted } = useSelector((state: any) => state.timer);
 
-	const { words, letterIndex, wordIndex, shiftIsPressed } = useSelector(
-		(state: any) => state.writer
-	);
+	const { currentVisibleWords, letterIndex, wordIndex, shiftIsPressed } =
+		useSelector((state: any) => state.writer);
 
 	useEffect(() => {
 		const generatedWords = getRandomWords();
-
 		dispatch(setAllWords(generatedWords));
-		dispatch(setWords([...generatedWords.slice(0, WORDS_PER_PAGE)]));
 	}, []);
 
 	const handleDeleteLetter = (): void => {
 		dispatch(deleteCurrentLetter());
-		dispatch(updateCurrentLetterColor(LetterColor.Gray));
+		dispatch(setCurrentLetterColor(LetterColor.Gray));
 	};
 
 	const handleMoveToNextWord = (): void => {
-		if (wordIndex + 1 === words.length) {
+		if (wordIndex + 1 === currentVisibleWords.length) {
 			dispatch(moveToNextPage());
 			return;
 		}
@@ -45,7 +43,7 @@ const useWriter = () => {
 	};
 
 	const handleLetterInput = (pressedKey: string): void => {
-		if (letterIndex >= words[wordIndex].letters.length) {
+		if (letterIndex >= currentVisibleWords[wordIndex].letters.length) {
 			return;
 		}
 
@@ -53,17 +51,20 @@ const useWriter = () => {
 			pressedKey = pressedKey.toUpperCase();
 		}
 
-		if (words[wordIndex]?.letters[letterIndex]?.key === pressedKey) {
-			dispatch(updateCurrentLetterColor(LetterColor.Green));
+		if (
+			currentVisibleWords[wordIndex]?.letters[letterIndex]?.key ===
+			pressedKey
+		) {
+			dispatch(setCurrentLetterColor(LetterColor.Green));
 		} else {
-			dispatch(updateCurrentLetterColor(LetterColor.Red));
+			dispatch(setCurrentLetterColor(LetterColor.Red));
 		}
 
 		dispatch(moveToNextLetter());
 	};
 
 	const handleKeyUp = (e: KeyboardEvent): void => {
-		if (!isStarted) {
+		if (!timerIsStarted) {
 			dispatch(startTimer());
 		}
 

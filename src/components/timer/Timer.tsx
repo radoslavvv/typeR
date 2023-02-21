@@ -1,4 +1,5 @@
-import { useTimer } from "../../hooks/useTimer";
+import { useSelector } from "react-redux";
+import useTimer from "../../hooks/useTimer";
 
 import styles from "./Timer.module.scss";
 

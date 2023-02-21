@@ -1,16 +1,26 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+import {
+	setTimerTime,
+	stopTimer,
+	updateTime,
+} from "../redux/features/timer/timerSlice";
 
-import { stopTimer, updateTime } from "../redux/features/timer/timerSlice";
-
-export const useTimer = () => {
+const useTimer = () => {
 	const dispatch = useDispatch();
-	const { isStarted, time } = useSelector((state: any) => state.timer);
+	const { timerConfigTime } = useSelector((state: any) => state.config);
+	const { timerIsStarted, timerTime } = useSelector(
+		(state: any) => state.timer
+	);
 
 	useEffect(() => {
-		if (isStarted) {
-			if (time === 0) {
+		dispatch(setTimerTime(timerConfigTime));
+	}, []);
+
+	useEffect(() => {
+		if (timerIsStarted) {
+			if (timerTime === 0) {
 				dispatch(stopTimer());
 				return;
 			}
@@ -19,16 +29,18 @@ export const useTimer = () => {
 				dispatch(updateTime());
 			}, 1000);
 		}
-	}, [isStarted, time]);
+	}, [timerIsStarted, timerTime]);
 
 	const formattedTimer = useMemo(() => {
-		const formattedSeconds = time.toLocaleString("en-US", {
+		const formattedSeconds = timerTime.toLocaleString("en-US", {
 			minimumIntegerDigits: 2,
 			useGrouping: false,
 		});
 
 		return `00:${formattedSeconds}`;
-	}, [time]);
+	}, [timerTime]);
 
 	return { formattedTimer };
 };
+
+export default useTimer;
