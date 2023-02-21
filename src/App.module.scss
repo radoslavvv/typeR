@@ -1,22 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 
-.App {
-	display: grid;
-	// grid-template-rows: 3fr;
-	// grid-template-columns: 1fr;
-
-	height: 100vh;
+* {
+	font-family: "Ubuntu" !important;
+	box-sizing: border-box;
 }
 
 body {
 	padding: 0px;
 	margin: 0px;
 
-	background: rgb(43, 43, 43);
+	background: #18122b;
 
 	font-size: 16px;
 }
 
-* {
-	font-family: "Ubuntu" !important;
+.App {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100vh;
 }
