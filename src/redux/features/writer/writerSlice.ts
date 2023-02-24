@@ -13,6 +13,11 @@ export interface WriterSlice {
 	wordsPerPage: number;
 
 	shiftIsPressed: boolean;
+
+	correctKeyStrokes: number;
+	wrongKeyStrokes: number;
+
+	writtenWordsCount: number;
 }
 
 const initialState: WriterSlice = {
@@ -26,10 +31,15 @@ const initialState: WriterSlice = {
 	pageNumber: 0,
 
 	shiftIsPressed: false,
+
+	correctKeyStrokes: 0,
+	wrongKeyStrokes: 0,
+
+	writtenWordsCount: 0,
 };
 
 export const writerSlice = createSlice({
-	name: "wrtier",
+	name: "writer",
 	initialState,
 	reducers: {
 		setAllWords: (state, action: PayloadAction<Word[]>) => {
@@ -61,6 +71,12 @@ export const writerSlice = createSlice({
 				],
 				color: action.payload,
 			};
+
+			if (action.payload === LetterColor.Green) {
+				state.correctKeyStrokes++;
+			} else {
+				state.wrongKeyStrokes++;
+			}
 		},
 		moveToNextLetter: (state) => {
 			state.letterIndex += 1;
@@ -68,6 +84,8 @@ export const writerSlice = createSlice({
 
 		moveToPreviousWord: (state) => {
 			state.wordIndex -= 1;
+
+			state.writtenWordsCount -= 1;
 		},
 		moveToNextWord: (state) => {
 			state.currentVisibleWords[state.wordIndex]?.letters?.map(
@@ -79,6 +97,18 @@ export const writerSlice = createSlice({
 					return l;
 				}
 			);
+
+			// if (
+			// 	state.currentVisibleWords[state.wordIndex]?.letters.find(
+			// 		(l) => l.color === LetterColor.Red
+			// 	)
+			// ) {
+			// 	state.wrongWords++;
+			// } else {
+			// 	state.correctWords++;
+			// }
+
+			state.writtenWordsCount += 1;
 
 			state.wordIndex += 1;
 
@@ -103,6 +133,21 @@ export const writerSlice = createSlice({
 
 			state.pageNumber += 1;
 		},
+		resetWriter: (state) => {
+			state.allWords = [];
+			state.currentVisibleWords = [];
+
+			state.wordIndex = 0;
+			state.letterIndex = 0;
+
+			state.wordsPerPage = 55;
+			state.pageNumber = 0;
+
+			state.shiftIsPressed = false;
+
+			state.correctKeyStrokes = 0;
+			state.wrongKeyStrokes = 0;
+		},
 	},
 });
 
@@ -115,6 +160,7 @@ export const {
 	moveToNextWord,
 	setShiftIsPressed,
 	moveToNextPage,
+	resetWriter,
 } = writerSlice.actions;
 
 export default writerSlice.reducer;

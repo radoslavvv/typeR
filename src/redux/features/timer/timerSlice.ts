@@ -33,10 +33,15 @@ export const timerSlice = createSlice({
 		updateTime: (state) => {
 			state.timerTime -= 1;
 		},
+		resetTimer: (state, action: PayloadAction<number>) => {
+			state.timerTime = action.payload;
+			state.timerIsStarted = false;
+			state.timerIsDone = false;
+		},
 	},
 });
 
-export const { startTimer, stopTimer, updateTime, setTimerTime } =
+export const { startTimer, stopTimer, updateTime, setTimerTime, resetTimer } =
 	timerSlice.actions;
 
 export default timerSlice.reducer;

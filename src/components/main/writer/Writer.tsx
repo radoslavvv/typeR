@@ -1,13 +1,15 @@
 import { useSelector } from "react-redux";
 
-import { WriterWord } from "../writerWord/WriterWord";
+import { WriterWord } from "./writerWord/WriterWord";
 
-import useWriter from "../../hooks/useWriter";
+import useWriter from "../../../hooks/useWriter";
 
-import Word from "../../models/Word";
+import Word from "../../../models/Word";
 
 import styles from "./Writer.module.scss";
-import useGlobalKeyEvents from "../../hooks/useGlobalKeyEvents";
+import useGlobalKeyEvents from "../../../hooks/useGlobalKeyEvents";
+import Letter from "../../../models/Letter";
+import LetterColor from "../../../enums/LetterColor";
 
 interface IWriterProps {}
 

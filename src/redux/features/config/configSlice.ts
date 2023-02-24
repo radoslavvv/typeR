@@ -5,7 +5,7 @@ export interface ConfigState {
 }
 
 const initialState: ConfigState = {
-	timerConfigTime: 10,
+	timerConfigTime: 30,
 };
 
 export const configSlice = createSlice({

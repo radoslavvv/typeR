@@ -1,6 +1,6 @@
 .letter {
 	&.gray {
-		color: #443c68;
+		color: #6b778d;
 	}
 
 	&.green {
@@ -15,4 +15,6 @@
 .word {
 	display: flex;
 	font-size: 25px;
+
+	animation: fadeIn 0.3s ease-in;
 }
