@@ -21,6 +21,11 @@
 		justify-content: space-between;
 
 		animation: fadeIn 0.3s ease-in;
+
+		&::after {
+			content: "";
+			flex: auto;
+		}
 	}
 }
 

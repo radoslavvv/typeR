@@ -10,6 +10,7 @@ import styles from "./Writer.module.scss";
 import useGlobalKeyEvents from "../../../hooks/useGlobalKeyEvents";
 import Letter from "../../../models/Letter";
 import LetterColor from "../../../enums/LetterColor";
+import { nanoid } from "@reduxjs/toolkit";
 
 interface IWriterProps {}
 
@@ -28,7 +29,7 @@ const Writer = (props: IWriterProps) => {
 				{currentVisibleWords?.length &&
 					currentVisibleWords.map((word: Word, wi: number) => (
 						<WriterWord
-							key={wi}
+							key={nanoid()}
 							isCurrentWord={wi === wordIndex}
 							letterIndex={letterIndex}
 							word={word}

@@ -27,7 +27,7 @@ const initialState: WriterSlice = {
 	wordIndex: 0,
 	letterIndex: 0,
 
-	wordsPerPage: 55,
+	wordsPerPage: 42,
 	pageNumber: 0,
 
 	shiftIsPressed: false,
@@ -140,7 +140,7 @@ export const writerSlice = createSlice({
 			state.wordIndex = 0;
 			state.letterIndex = 0;
 
-			state.wordsPerPage = 55;
+			state.wordsPerPage = 42;
 			state.pageNumber = 0;
 
 			state.shiftIsPressed = false;

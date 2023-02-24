@@ -1,3 +1,4 @@
+import { nanoid } from "@reduxjs/toolkit";
 import { memo, useState, useEffect } from "react";
 import Letter from "../../../../models/Letter";
 import Word from "../../../../models/Word";
@@ -22,7 +23,7 @@ export const WriterWord: React.FC<IWriterWordProps> = memo(
 						{isCurrentWord && li === letterIndex && <Cursor />}
 
 						<div
-							key={li}
+							key={nanoid()}
 							className={`${styles.letter} ${
 								styles[letter.color]
 							}`}
