@@ -1,25 +1,32 @@
 @use "../../../shared/styles/" as *;
 
-.timer {
-	grid-row: 2;
-
-	position: relative;
-
+.timerContainer {
+	width: 60vw;
+	margin: 0 auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 
-	width: fit-content;
-	padding: 5px 45px;
-	border-radius: 10px;
-	margin: 0 auto;
+	.timer {
+		grid-row: 2;
 
-	color: white;
-	background: $darkBlue;
+		position: relative;
 
-	font-size: 30px;
-	text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-	user-select: none;
-	animation: slideDown 0.45s ease-in-out;
+		width: fit-content;
+		padding: 5px 45px;
+		border-radius: 10px;
+
+		color: white;
+		background: $darkBlue;
+
+		font-size: 30px;
+		text-align: center;
+
+		user-select: none;
+		animation: slideDown 0.45s ease-in-out;
+	}
 }

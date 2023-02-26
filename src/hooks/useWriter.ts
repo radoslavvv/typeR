@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { startTimer } from "../redux/features/timer/timerSlice";
@@ -34,10 +34,11 @@ const useWriter = () => {
 	};
 
 	const handleMoveToNextWord = (): void => {
-		if (wordIndex + 1 === currentVisibleWords.length) {
-			dispatch(moveToNextPage());
-			return;
-		}
+		console.log("move to next word");
+		// if (wordIndex + 1 === currentVisibleWords.length) {
+		// 	dispatch(moveToNextPage());
+		// 	return;
+		// }
 
 		dispatch(moveToNextWord());
 	};

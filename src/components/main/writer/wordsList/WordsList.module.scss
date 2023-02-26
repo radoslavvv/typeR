@@ -1,20 +1,31 @@
 @use "../../../../shared/styles/" as *;
 
-.wordsList {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-	user-select: none;
+.wordsListContainer {
+	width: 100%;
+	height: 230px;
+	padding: 20px;
+	border-radius: 10px;
 
-	height: 190px;
-	// overflow: hidden;
+	background: $fadedLigherBlue;
 
-	justify-content: space-between;
+	box-shadow: $darkBlue 9px 9px 18px;
 
-	animation: fadeIn 0.45s ease-in;
+	.wordsList {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		user-select: none;
 
-	&::after {
-		content: "";
-		flex: auto;
+		height: 190px;
+		overflow: hidden;
+
+		justify-content: space-between;
+
+		animation: fadeIn 0.45s ease-in;
+
+		&::after {
+			content: "";
+			flex: auto;
+		}
 	}
 }

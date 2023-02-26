@@ -11,14 +11,13 @@
 
 	margin: 0px auto;
 
-	.wordsListContainer {
-		width: 100%;
-		padding: 20px;
-		border-radius: 10px;
+	@include mobile {
+		width: 85vw;
+		height: 40vh;
+	}
 
-		background: $fadedLigherBlue;
-
-		box-shadow: $darkBlue 9px 9px 18px;
+	@include tablet {
+		width: 85vw;
 	}
 
 	.refreshButton {

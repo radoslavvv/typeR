@@ -6,7 +6,11 @@ import styles from "./Timer.module.scss";
 const Timer = () => {
 	const { formattedTimer } = useTimer();
 
-	return <div className={styles.timer}>{formattedTimer}</div>;
+	return (
+		<div className={styles.timerContainer}>
+			<div className={styles.timer}>{formattedTimer}</div>
+		</div>
+	);
 };
 
 export default Timer;

@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
-import { memo } from "react";
-import { useSelector } from "react-redux";
+import { memo, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Word from "../../../../models/Word";
 import { WriterWord } from "../writerWord/WriterWord";
 
@@ -12,23 +12,24 @@ const WordsList = memo(() => {
 	);
 
 	return (
-		currentVisibleWords &&
-		currentVisibleWords?.length > 0 && (
-			<div className={styles.wordsList}>
-				{currentVisibleWords.map((word: Word, wi: number) => (
-					<WriterWord
-						key={nanoid()}
-						isCurrentWord={wi === wordIndex}
-						letterIndex={letterIndex}
-						word={word}
-						isLastLetter={
-							letterIndex ===
-							currentVisibleWords[wordIndex].letters.length
-						}
-					/>
-				))}
-			</div>
-		)
+		<div className={styles.wordsListContainer}>
+			{currentVisibleWords && currentVisibleWords?.length > 0 && (
+				<div className={styles.wordsList}>
+					{currentVisibleWords.map((word: Word, wi: number) => (
+						<WriterWord
+							key={nanoid()}
+							isCurrentWord={wi === wordIndex}
+							letterIndex={letterIndex}
+							word={word}
+							isLastLetter={
+								letterIndex ===
+								currentVisibleWords[wordIndex].letters.length
+							}
+						/>
+					))}
+				</div>
+			)}
+		</div>
 	);
 });
 

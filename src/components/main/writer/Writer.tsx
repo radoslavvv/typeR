@@ -22,6 +22,7 @@ import {
 } from "../../../redux/features/writer/writerSlice";
 import { getRandomWords } from "../../../services/WordsService";
 import WordsList from "./wordsList/WordsList";
+import { useRef } from "react";
 
 interface IWriterProps {}
 
@@ -46,9 +47,7 @@ const Writer = (props: IWriterProps) => {
 
 	return (
 		<div className={styles.writerContainer}>
-			<div className={styles.wordsListContainer}>
-				<WordsList />
-			</div>
+			<WordsList />
 
 			<IoMdRefresh
 				className={styles.refreshButton}

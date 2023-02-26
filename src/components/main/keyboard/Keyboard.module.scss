@@ -17,6 +17,10 @@
 
 	animation: slideUp 0.65s ease-in-out;
 
+	@include mobile {
+		display: none;
+	}
+
 	.row {
 		display: flex;
 		flex-direction: row;

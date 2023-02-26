@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Ref, RefObject } from "react";
 import LetterColor from "../../../enums/LetterColor";
 import Word from "../../../models/Word";
 import { getRandomWords } from "../../../services/WordsService";
@@ -46,9 +47,7 @@ export const writerSlice = createSlice({
 		setAllWords: (state, action: PayloadAction<Word[]>) => {
 			state.allWords = [...action.payload];
 
-			state.currentVisibleWords = [
-				...action.payload.slice(0, state.wordsPerPage),
-			];
+			state.currentVisibleWords = [...action.payload.slice(0)];
 		},
 
 		deleteCurrentLetter: (state) => {
@@ -99,16 +98,6 @@ export const writerSlice = createSlice({
 				}
 			);
 
-			// if (
-			// 	state.currentVisibleWords[state.wordIndex]?.letters.find(
-			// 		(l) => l.color === LetterColor.Red
-			// 	)
-			// ) {
-			// 	state.wrongWords++;
-			// } else {
-			// 	state.correctWords++;
-			// }
-
 			state.writtenWordsCount += 1;
 
 			state.wordIndex += 1;
@@ -121,18 +110,20 @@ export const writerSlice = createSlice({
 		},
 
 		moveToNextPage: (state) => {
-			const startIndex: number =
-				state.wordsPerPage * state.pageNumber + state.wordIndex + 1;
-			const endIndex: number = startIndex + state.wordsPerPage;
+			if (state.wordIndex > 0) {
+				const startIndex: number =
+					state.wordIndex * state.pageNumber + state.wordIndex;
+				// const endIndex: number = startIndex + state.wordsPerPage;
 
-			state.currentVisibleWords = [
-				...state.allWords.slice(startIndex, endIndex),
-			];
+				state.currentVisibleWords = [
+					...state.allWords.slice(startIndex),
+				];
 
-			state.wordIndex = 0;
-			state.letterIndex = 0;
+				state.wordIndex = 0;
+				state.letterIndex = 0;
 
-			state.pageNumber += 1;
+				state.pageNumber += 1;
+			}
 		},
 		resetWriter: (state) => {
 			state.allWords = [];

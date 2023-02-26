@@ -1,6 +1,8 @@
 @use "../../shared/styles/" as *;
 
 .footer {
+	grid-row: 5;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
