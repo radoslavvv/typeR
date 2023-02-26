@@ -1,3 +1,5 @@
+@use "../../../../shared/styles/" as *;
+
 .key {
 	display: flex;
 	justify-content: center;
@@ -6,19 +8,19 @@
 	width: 3.25rem;
 	height: 3.25rem;
 
-	background: #6b778d;
+	background: $fadedLigherBlue;
 
 	border-radius: 0.3125rem;
 
 	font-weight: bold;
 
 	text-align: center;
-
+	box-shadow: $darkBlue 8px 8px 2px;
 	transition-duration: 75ms;
 	user-select: none;
 
 	&.pressed {
-		background: #969696;
+		background: #8a99b5;
 		transform: scale(0.9);
 	}
 }

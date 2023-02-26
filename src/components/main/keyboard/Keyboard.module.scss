@@ -1,4 +1,8 @@
+@use "../../../shared/styles/" as *;
+
 .keyboard {
+	position: relative;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -7,9 +11,11 @@
 
 	width: 50vw;
 
-	margin: 3.125rem auto;
+	margin: 0 auto;
 
 	color: white;
+
+	animation: slideUp 0.65s ease-in-out;
 
 	.row {
 		display: flex;

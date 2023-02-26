@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Word from "../../models/Word";
-import { resetTimer } from "../../redux/features/timer/timerSlice";
+import { resetTimer, stopTimer } from "../../redux/features/timer/timerSlice";
 import {
 	resetWriter,
 	setAllWords,
@@ -21,7 +21,9 @@ const Header = (props: IHeaderProps) => {
 		dispatch(resetWriter());
 
 		const generatedWords: Word[] = getRandomWords();
-		dispatch(setAllWords(generatedWords));
+		setTimeout(() => {
+			dispatch(setAllWords(generatedWords));
+		}, 100);
 	};
 
 	return (

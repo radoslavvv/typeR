@@ -1,0 +1,65 @@
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 100;
+	}
+}
+
+@keyframes slideLeft {
+	0% {
+		margin-left: -250px;
+		opacity: 0;
+	}
+
+	100% {
+		margin-left: 0px;
+		opacity: 1;
+	}
+}
+
+@keyframes slideRight {
+	0% {
+		margin-right: -250px;
+		opacity: 0;
+	}
+
+	100% {
+		margin-right: 0px;
+		opacity: 1;
+	}
+}
+
+@keyframes slideDown {
+	0% {
+		top: -250px;
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		top: 0px;
+		opacity: 1;
+	}
+}
+
+@keyframes slideUp {
+	0% {
+		bottom: -250px;
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		bottom: 0px;
+		opacity: 1;
+	}
+}

@@ -32,12 +32,20 @@ const useTimer = () => {
 	}, [timerIsStarted, timerTime]);
 
 	const formattedTimer = useMemo(() => {
-		const formattedSeconds = timerTime.toLocaleString("en-US", {
+		const minutes: number = Math.floor(timerTime / 60);
+		const seconds: number = timerTime % 60;
+
+		const formattedSeconds = seconds.toLocaleString("en-US", {
 			minimumIntegerDigits: 2,
 			useGrouping: false,
 		});
 
-		return `00:${formattedSeconds}`;
+		const formattedMinutes = minutes.toLocaleString("en-US", {
+			minimumIntegerDigits: 2,
+			useGrouping: false,
+		});
+
+		return `${formattedMinutes}:${formattedSeconds}`;
 	}, [timerTime]);
 
 	return { formattedTimer };

@@ -1,3 +1,5 @@
+@use "../../../shared/styles/" as *;
+
 .writerContainer {
 	position: relative;
 	display: flex;
@@ -5,36 +7,35 @@
 	justify-content: center;
 	align-items: center;
 
-	width: 50vw;
+	width: 60vw;
 
 	margin: 0px auto;
 
-	.wordsList {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 10px;
-		user-select: none;
+	.wordsListContainer {
+		width: 100%;
+		padding: 20px;
+		border-radius: 10px;
 
-		height: 190px;
-		// overflow: hidden;
+		background: $fadedLigherBlue;
 
-		justify-content: space-between;
+		box-shadow: $darkBlue 9px 9px 18px;
+	}
 
-		animation: fadeIn 0.3s ease-in;
+	.refreshButton {
+		margin-top: 15px;
 
-		&::after {
-			content: "";
-			flex: auto;
+		color: $fadedLigherBlue;
+
+		font-size: 1.75rem;
+		font-weight: bold;
+
+		cursor: pointer;
+		transition-duration: 0.2s;
+
+		&:hover {
+			color: white;
+
+			transform: scale(1.2);
 		}
-	}
-}
-
-@keyframes fadeIn {
-	0% {
-		opacity: 0;
-	}
-
-	100% {
-		opacity: 100;
 	}
 }

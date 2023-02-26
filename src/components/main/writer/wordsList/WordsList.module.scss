@@ -1,0 +1,20 @@
+@use "../../../../shared/styles/" as *;
+
+.wordsList {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	user-select: none;
+
+	height: 190px;
+	// overflow: hidden;
+
+	justify-content: space-between;
+
+	animation: fadeIn 0.45s ease-in;
+
+	&::after {
+		content: "";
+		flex: auto;
+	}
+}

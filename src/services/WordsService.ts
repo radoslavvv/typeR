@@ -1,7 +1,6 @@
 import words from "../data/words";
 import Letter from "../models/Letter";
 import Word from "../models/Word";
-import { WORDS_PER_PAGE } from "../utils/constants";
 
 const generateRandomWordsArray = (): string[] => {
 	let selectedWords: string[] = [];

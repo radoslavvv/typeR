@@ -31,7 +31,9 @@ export const timerSlice = createSlice({
 			state.timerIsDone = true;
 		},
 		updateTime: (state) => {
-			state.timerTime -= 1;
+			if (state.timerIsStarted) {
+				state.timerTime -= 1;
+			}
 		},
 		resetTimer: (state, action: PayloadAction<number>) => {
 			state.timerTime = action.payload;

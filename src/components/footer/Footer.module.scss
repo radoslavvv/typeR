@@ -1,9 +1,11 @@
+@use "../../shared/styles/" as *;
+
 .footer {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 
-	background: #17223b;
+	background: $darkBlue;
 	color: white;
 
 	height: 55px;

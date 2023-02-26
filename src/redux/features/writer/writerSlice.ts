@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import LetterColor from "../../../enums/LetterColor";
 import Word from "../../../models/Word";
+import { getRandomWords } from "../../../services/WordsService";
 
 export interface WriterSlice {
 	allWords: Word[];
@@ -27,7 +28,7 @@ const initialState: WriterSlice = {
 	wordIndex: 0,
 	letterIndex: 0,
 
-	wordsPerPage: 42,
+	wordsPerPage: 50,
 	pageNumber: 0,
 
 	shiftIsPressed: false,
@@ -140,7 +141,7 @@ export const writerSlice = createSlice({
 			state.wordIndex = 0;
 			state.letterIndex = 0;
 
-			state.wordsPerPage = 42;
+			state.wordsPerPage = 50;
 			state.pageNumber = 0;
 
 			state.shiftIsPressed = false;

@@ -1,8 +1,8 @@
-.letter {
-	// animation: fadeIn 0.3s ease-in;
+@use "../../../../shared/styles" as *;
 
+.letter {
 	&.gray {
-		color: #6b778d;
+		color: $darkBlue;
 	}
 
 	&.green {
@@ -17,16 +17,4 @@
 .word {
 	display: flex;
 	font-size: 25px;
-
-	// animation: fadeIn 0.3s ease-in;
-}
-
-@keyframes fadeIn {
-	0% {
-		opacity: 0;
-	}
-
-	100% {
-		opacity: 100;
-	}
 }

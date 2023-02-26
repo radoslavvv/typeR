@@ -1,4 +1,8 @@
+@use "../../shared/styles/" as *;
+
 .header {
+	grid-row: 1;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -6,7 +10,7 @@
 	height: 75px;
 
 	color: white;
-	background: #17223b;
+	background: $darkBlue;
 
 	font-size: 35px;
 

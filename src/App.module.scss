@@ -1,3 +1,5 @@
+@use "./shared/styles/" as *;
+
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 
 * {
@@ -11,14 +13,19 @@ body {
 	padding: 0px;
 	margin: 0px;
 
-	background: #263859;
+	background: $lighterBlue;
 
 	font-size: 16px;
+
+	overflow: hidden;
 }
 
 .App {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	display: grid;
+	grid-template-rows: 75px 45px 275px auto 55px;
+	row-gap: 45px;
+	// display: flex;
+	// flex-direction: column;
+	// justify-content: space-between;
 	height: 100vh;
 }

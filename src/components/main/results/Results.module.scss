@@ -1,3 +1,5 @@
+@use "../../../shared/styles/" as *;
+
 .results {
 	display: flex;
 	justify-content: center;
@@ -12,7 +14,7 @@
 	margin-right: auto;
 
 	color: white;
-	background: #17223b;
+	background: $darkBlue;
 
 	font-size: 2rem;
 	text-align: center;
@@ -57,7 +59,7 @@
 		margin-top: 25px;
 
 		color: white;
-		background: #263859;
+		background: $lighterBlue;
 
 		font-size: 1.75rem;
 

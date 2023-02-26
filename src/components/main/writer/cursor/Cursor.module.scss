@@ -3,10 +3,10 @@
 	background: lime;
 	line-height: 20px;
 
-	margin-top: 1px;
+	margin-top: 2px;
 
 	-webkit-animation: blink 0.75s infinite;
-	width: 1px;
+	width: 2px;
 	height: 25px;
 	margin-right: -1px;
 
@@ -20,15 +20,5 @@
 		100% {
 			background: transparent;
 		}
-	}
-}
-
-@keyframes fadeIn {
-	0% {
-		opacity: 0;
-	}
-
-	100% {
-		opacity: 100;
 	}
 }
