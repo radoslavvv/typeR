@@ -137,6 +137,8 @@ export const writerSlice = createSlice({
 
 			state.shiftIsPressed = false;
 
+			state.writtenWordsCount = 0;
+
 			state.correctKeyStrokes = 0;
 			state.wrongKeyStrokes = 0;
 		},
