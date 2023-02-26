@@ -20,7 +20,9 @@ export const WriterWord: React.FC<IWriterWordProps> = memo(
 			<div className={styles.word}>
 				{word.letters.map((letter: Letter, li) => (
 					<>
-						{isCurrentWord && li === letterIndex && <Cursor />}
+						{isCurrentWord && li === letterIndex && (
+							<Cursor isBeforeWord={true} />
+						)}
 
 						<div
 							key={nanoid()}
@@ -33,7 +35,9 @@ export const WriterWord: React.FC<IWriterWordProps> = memo(
 					</>
 				))}
 
-				{isCurrentWord && isLastLetter && <Cursor />}
+				{isCurrentWord && isLastLetter && (
+					<Cursor isBeforeWord={false} />
+				)}
 			</div>
 		);
 	}

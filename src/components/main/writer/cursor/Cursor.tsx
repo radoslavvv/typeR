@@ -6,28 +6,31 @@ import {
 } from "../../../../redux/features/writer/writerSlice";
 import styles from "./Cursor.module.scss";
 
-export const Cursor: React.FC = () => {
+export interface ICursorProps {
+	isBeforeWord: boolean;
+}
+
+export const Cursor = (props: ICursorProps) => {
 	const dispatch = useDispatch();
 
 	const ref = useRef<any>(null);
 
 	useEffect(() => {
-		const parent: any =
-			ref?.current?.parentElement?.parentElement?.parentElement;
+		if (props.isBeforeWord) {
+			const parent: any =
+				ref?.current?.parentElement?.parentElement?.parentElement;
 
-		const elementRect = ref?.current?.getBoundingClientRect();
-		const parentRect = parent?.getBoundingClientRect();
+			const elementRect = ref?.current?.getBoundingClientRect();
+			const parentRect = parent?.getBoundingClientRect();
 
-		if (
-			!(
-				elementRect.top >= parentRect.top &&
-				elementRect.bottom <= parentRect.bottom
-			)
-		) {
-			console.log("move to next page");
-
-			dispatch(moveToNextPage());
-			// dispatch(moveToNextWord());
+			if (
+				!(
+					elementRect.top >= parentRect.top &&
+					elementRect.bottom <= parentRect.bottom
+				)
+			) {
+				dispatch(moveToNextPage());
+			}
 		}
 	}, []);
 

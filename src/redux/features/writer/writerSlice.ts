@@ -47,7 +47,7 @@ export const writerSlice = createSlice({
 		setAllWords: (state, action: PayloadAction<Word[]>) => {
 			state.allWords = [...action.payload];
 
-			state.currentVisibleWords = [...action.payload.slice(0)];
+			state.currentVisibleWords = [...action.payload.slice(0, 75)];
 		},
 
 		deleteCurrentLetter: (state) => {
@@ -116,7 +116,7 @@ export const writerSlice = createSlice({
 				// const endIndex: number = startIndex + state.wordsPerPage;
 
 				state.currentVisibleWords = [
-					...state.allWords.slice(startIndex),
+					...state.allWords.slice(startIndex, startIndex + 75),
 				];
 
 				state.wordIndex = 0;
