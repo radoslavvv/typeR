@@ -9,7 +9,7 @@
 
 	width: 60vw;
 
-	margin: 0px auto;
+	margin: 0rem auto;
 
 	@include mobile {
 		width: 85vw;
@@ -21,7 +21,7 @@
 	}
 
 	.refreshButton {
-		margin-top: 15px;
+		margin-top: 0.9375rem;
 
 		color: $fadedLigherBlue;
 

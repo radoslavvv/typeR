@@ -5,13 +5,13 @@
 * {
 	font-family: "Ubuntu" !important;
 	box-sizing: border-box;
-	margin: 0px;
-	padding: 0px;
+	margin: 0rem;
+	padding: 0rem;
 }
 
 body {
-	padding: 0px;
-	margin: 0px;
+	padding: 0rem;
+	margin: 0rem;
 
 	background: $lighterBlue;
 
@@ -22,8 +22,8 @@ body {
 
 .App {
 	display: grid;
-	grid-template-rows: 75px 45px 275px auto 55px;
-	row-gap: 45px;
+	grid-template-rows: 4.6875rem 2.8125rem 17.1875rem auto 3.4375rem;
+	row-gap: 2.8125rem;
 	// display: flex;
 	// flex-direction: column;
 	// justify-content: space-between;

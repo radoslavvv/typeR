@@ -12,8 +12,8 @@
 
 	width: 50vw;
 
-	border-radius: 5px;
-	padding: 35px;
+	border-radius: 0.3125rem;
+	padding: 2.1875rem;
 	margin-left: auto;
 	margin-right: auto;
 
@@ -30,23 +30,23 @@
 	}
 
 	h2 {
-		margin-bottom: 35px;
+		margin-bottom: 2.1875rem;
 	}
 	.row {
 		display: flex;
 
-		margin-bottom: 25px;
-		gap: 25px;
+		margin-bottom: 1.5625rem;
+		gap: 1.5625rem;
 	}
 
 	.column {
 		display: flex;
 		flex-direction: column;
 
-		gap: 10px;
+		gap: 0.625rem;
 
 		span {
-			margin: 5px;
+			margin: 0.3125rem;
 		}
 	}
 
@@ -63,10 +63,10 @@
 	}
 
 	.resetButton {
-		padding: 10px 60px;
+		padding: 0.625rem 3.75rem;
 		border: none;
-		border-radius: 10px;
-		margin-top: 25px;
+		border-radius: 0.625rem;
+		margin-top: 1.5625;
 
 		color: white;
 		background: $lighterBlue;
