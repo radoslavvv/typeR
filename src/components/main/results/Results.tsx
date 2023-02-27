@@ -44,7 +44,9 @@ const Results = (props: IResultsProps) => {
 		dispatch(resetWriter());
 
 		const generatedWords: Word[] = getRandomWords();
-		dispatch(setAllWords(generatedWords));
+		setTimeout(() => {
+			dispatch(setAllWords(generatedWords));
+		}, 100);
 	};
 
 	return (
