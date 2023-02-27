@@ -29,6 +29,7 @@ const useWriter = () => {
 	}, []);
 
 	const handleDeleteLetter = (): void => {
+		debugger;
 		dispatch(deleteCurrentLetter());
 		dispatch(setCurrentLetterColor(LetterColor.Gray));
 	};
@@ -73,7 +74,6 @@ const useWriter = () => {
 		const pressedKeyCode: string = e.code.toLocaleLowerCase();
 
 		if (pressedKey === "backspace") {
-			handleDeleteLetter();
 			return;
 		}
 
@@ -98,6 +98,11 @@ const useWriter = () => {
 
 		if (pressedKey === "shift") {
 			dispatch(setShiftIsPressed(true));
+		}
+
+		if (pressedKey === "backspace") {
+			handleDeleteLetter();
+			return;
 		}
 	};
 

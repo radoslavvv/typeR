@@ -11,4 +11,18 @@
 	color: white;
 
 	height: 55px;
+
+	a {
+		color: $fadedLigherBlue;
+
+		font-size: 15px;
+		font-weight: bold;
+
+		text-decoration: none;
+		transition-duration: 0.5s;
+
+		&:hover {
+			color: white;
+		}
+	}
 }
