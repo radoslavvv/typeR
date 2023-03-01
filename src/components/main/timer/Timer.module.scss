@@ -1,32 +1,33 @@
 @use "../../../shared/styles/" as *;
 
 .timerContainer {
-	width: 60vw;
-	margin: 0 auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  width: 60vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-	.timer {
-		grid-row: 2;
+  .timer {
+    grid-row: 2;
 
-		position: relative;
+    position: relative;
 
-		display: flex;
-		justify-content: center;
-		align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-		width: fit-content;
-		padding: 0.3125rem 2.8125rem;
-		border-radius: 0.625rem;
+    width: fit-content;
+    padding: 0.3125rem 2.8125rem;
+    border-radius: 0.625rem;
 
-		color: white;
-		background: $darkBlue;
+    color: white;
+    background: $darkBlue;
 
-		font-size: 1.875rem;
-		text-align: center;
+    font-size: 1.875rem;
+    text-align: center;
 
-		user-select: none;
-		animation: slideDown 0.45s ease-in-out;
-	}
+    animation: slideDown 0.45s ease-in-out;
+    box-shadow: #17223b 0.5625rem 0.5625rem 1.125rem;
+    user-select: none;
+  }
 }

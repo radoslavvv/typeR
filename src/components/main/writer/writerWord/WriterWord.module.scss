@@ -1,20 +1,20 @@
 @use "../../../../shared/styles" as *;
 
 .letter {
-	&.gray {
-		color: $darkBlue;
-	}
+  &.gray {
+    color: $darkBlue;
+  }
 
-	&.green {
-		color: #c7c7c7;
-	}
+  &.green {
+    color: #c7c7c7;
+  }
 
-	&.red {
-		color: red;
-	}
+  &.red {
+    color: #8f0000;
+  }
 }
 
 .word {
-	display: flex;
-	font-size: 1.5625rem;
+  display: flex;
+  font-size: 1.5625rem;
 }

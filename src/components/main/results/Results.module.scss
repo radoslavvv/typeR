@@ -1,90 +1,120 @@
 @use "../../../shared/styles/" as *;
 
 .results {
-	grid-row: 2/5;
+  grid-row: 2/5;
 
-	position: relative;
+  position: relative;
 
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
 
-	width: 50vw;
+  width: 50vw;
 
-	border-radius: 0.3125rem;
-	padding: 0rem;
-	padding-bottom: 2.1875rem;
-	margin-left: auto;
-	margin-right: auto;
+  border-radius: 0.3125rem;
+  padding: 0rem;
+  padding-bottom: 2.1875rem;
+  margin-left: auto;
+  margin-right: auto;
 
-	color: white;
-	background: $darkBlue;
+  color: white;
+  background: $darkBlue;
 
-	font-size: 1.75rem;
-	text-align: center;
+  font-size: 1.75rem;
+  text-align: center;
 
-	animation: slideUp 0.5s ease-in-out;
+  animation: slideUp 0.5s ease-in-out;
+  box-shadow: rgb(0 0 0 / 20%) 0rem 0.4375rem 1.8125rem 0rem;
 
-	@include mobile {
-		width: 90vw;
-	}
+  @include mobile {
+    width: 90vw;
+  }
 
-	h2 {
-		width: 100%;
+  @include tablet {
+    width: 90vw;
+  }
 
-		padding: 0.9375rem 0rem;
-		border-top-left-radius: 0.3125rem;
-		border-top-right-radius: 0.3125rem;
+  h2 {
+    width: 100%;
 
-		background: $fadedLigherBlue;
-	}
-	.row {
-		display: flex;
+    padding: 0.9375rem 0rem;
+    border-top-left-radius: 0.3125rem;
+    border-top-right-radius: 0.3125rem;
 
-		margin-bottom: 1.5625rem;
-		gap: 1.5625rem;
-	}
+    background: $fadedLigherBlue;
+  }
 
-	.column {
-		display: flex;
-		flex-direction: column;
+  .row {
+    display: flex;
 
-		gap: 0.625rem;
+    gap: 1.5625rem;
 
-		span {
-			margin: 0.3125rem;
-		}
-	}
+    &.statisticsRow {
+      .column {
+        width: 10.5rem;
 
-	.value {
-		color: #6683c3;
+        &.accCol {
+          width: auto;
+        }
+      }
+    }
+  }
 
-		&.correct {
-			color: #609966;
-		}
+  .column {
+    display: flex;
+    flex-direction: column;
 
-		&.wrong {
-			color: #e96479;
-		}
-	}
+    gap: 0.625rem;
 
-	.resetButton {
-		padding: 0.5rem 3.3rem;
-		border: none;
-		border-radius: 0.625rem;
-		margin-top: 1.5625;
+    span {
+      margin: 0.3125rem;
+    }
 
-		color: white;
-		background: $lighterBlue;
+    &.wpmCol {
+      margin: 1rem 0rem;
+      gap: 0rem;
+    }
+  }
 
-		font-size: 1.25rem;
+  .value {
+    color: #6683c3;
 
-		cursor: pointer;
-		transition-duration: 0.2s;
+    &.correct {
+      color: #609966;
+    }
 
-		&:hover {
-			transform: scale(1.1);
-		}
-	}
+    &.wrong {
+      color: #e96479;
+    }
+  }
+
+  .wpm {
+    font-size: 6.25rem;
+    line-height: 6rem;
+  }
+
+  .resetButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3125rem;
+
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 0.3125rem;
+    margin-top: 1.5625;
+
+    color: white;
+    background: $lighterBlue;
+
+    font-size: 1.25rem;
+
+    cursor: pointer;
+    transition-duration: 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
 }

@@ -1,31 +1,32 @@
 @use "../../../../shared/styles/" as *;
 
 .wordsListContainer {
-	width: 100%;
-	height: 14.375rem;
-	padding: 1.25rem;
-	border-radius: 0.625rem;
+  width: 100%;
+  height: 14.375rem;
+  padding: 1.25rem;
+  border-radius: 0.625rem;
 
-	background: $fadedLigherBlue;
+  background: $fadedLigherBlue;
 
-	box-shadow: $darkBlue 0.5625rem 0.5625rem 1.125rem;
+  box-shadow: $darkBlue 0.5625rem 0.5625rem 1.125rem;
+  animation: fadeIn 1.5s ease-in-out;
 
-	.wordsList {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.625rem;
-		user-select: none;
+  .wordsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    user-select: none;
 
-		height: 11.875rem;
-		overflow: hidden;
+    height: 11.875rem;
+    overflow: hidden;
 
-		justify-content: space-between;
+    justify-content: space-between;
 
-		animation: fadeIn 0.45s ease-in;
+    animation: fadeIn 0.45s ease-in;
 
-		&::after {
-			content: "";
-			flex: auto;
-		}
-	}
+    &::after {
+      content: "";
+      flex: auto;
+    }
+  }
 }
