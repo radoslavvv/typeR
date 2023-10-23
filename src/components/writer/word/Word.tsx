@@ -4,7 +4,6 @@ import Letter from "../../../models/Letter";
 import LetterStatus from "../../../models/LetterStatus";
 import WordModel from "../../../models/Word";
 import { RootState } from "../../../store/Store";
-import Cursor from "../cursor/Cursor";
 
 interface IWordProps {
   word: WordModel;
@@ -17,23 +16,21 @@ const Word = ({ word, wordIndex }: IWordProps) => {
   );
 
   return (
-    <div className="text-2xl font-normal text-lightGray">
-      {word.letters.map((c: Letter, ci: number) => (
+    <div
+      className={`text-2xl font-normal text-lightGray ${
+        cursorPosition.wordIndex === wordIndex ? "activeWord" : ""
+      }`}
+    >
+      {word.letters.map((c: Letter) => (
         <>
-          {cursorPosition.wordIndex === wordIndex &&
-            cursorPosition.letterIndex === ci && <Cursor />}
           <span
-            className="border-1 border-l border-solid border-transparent"
-            style={{
-              color:
-                c.status === LetterStatus.Default
-                  ? "#4b5975"
-                  : c.status === LetterStatus.Wrong
-                  ? "red"
-                  : "#ccccb5",
-              borderBottom:
-                c.status === LetterStatus.Wrong ? "1px solid red" : "",
-            }}
+            className={`border-1 border-solid border-transparent duration-300 ${
+              c.status === LetterStatus.Default
+                ? "untyped"
+                : c.status === LetterStatus.Wrong
+                ? "text-customRed border-customRed border-b"
+                : "text-customWhite"
+            }`}
           >
             {c.content}
           </span>

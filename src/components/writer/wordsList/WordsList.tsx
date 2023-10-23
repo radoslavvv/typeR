@@ -7,7 +7,7 @@ interface IWordsListProps {
 
 const WordsList = ({ words }: IWordsListProps) => {
   return (
-    <div className="flex h-28 w-full flex-wrap gap-2 overflow-hidden text-lightGray">
+    <div className="wordsList flex h-28 w-full flex-wrap gap-2 overflow-hidden text-lightGray">
       {words.map((w: Word, wi: number) => (
         <WordComponent word={w} wordIndex={wi}></WordComponent>
       ))}

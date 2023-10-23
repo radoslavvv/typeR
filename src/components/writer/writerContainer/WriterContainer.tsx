@@ -12,6 +12,7 @@ import {
 } from "../../../store/features/WordsSlice";
 import CursorPosition from "../../../models/CursorPosition";
 import LetterStatus from "../../../models/LetterStatus";
+import Cursor from "../cursor/Cursor";
 
 const WriterContainer = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +24,7 @@ const WriterContainer = () => {
   const words: Word[] = useSelector((state: RootState) => state.words.words);
 
   React.useEffect(() => {
-    const randomWords: string[] = getRandomWords(MOST_USED_WORDS, 200);
+    const randomWords: string[] = getRandomWords(MOST_USED_WORDS, 300);
     const parsedWords: Word[] = randomWords.map((w) => new Word(w));
 
     dispatch(setWords(parsedWords));
@@ -32,9 +33,6 @@ const WriterContainer = () => {
   const handleKeyPress = (e: KeyboardEvent) => {
     if (e.code === "Space") {
       dispatch(setCursorPosition([cursorPosition.wordIndex + 1, 0]));
-      //   setCursorPosition((prev) => {
-      //     return [prev[0] + 1, 0];
-      //   });
       return;
     } else if (e.code === "Backspace") {
       let newCursorPosition: CursorPosition = new CursorPosition(0, 0);
@@ -134,7 +132,15 @@ const WriterContainer = () => {
     };
   }, [words, cursorPosition]);
 
-  return <WordsList words={words} />;
+  return (
+    // <div className="relative">
+    <>
+      <WordsList words={words} />
+      <Cursor />
+    </>
+
+    // </div>
+  );
 };
 
 export default WriterContainer;
