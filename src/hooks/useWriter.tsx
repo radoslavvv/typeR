@@ -3,7 +3,7 @@ import React from "react";
 import {
   setCorrectKeyStrokes,
   setCursorPosition,
-  setIsFinished,
+  setIsRunning,
   setWords,
   setWrongKeyStrokes,
 } from "../store/features/WordsSlice";
@@ -33,6 +33,9 @@ const useWriter = () => {
     (state: RootState) => state.settings.numbersAreEnabled,
   );
 
+  const writerIsRunning: boolean = useSelector(
+    (state: RootState) => state.words.isRunning,
+  );
   const cursorPosition: CursorPosition = useSelector(
     (state: RootState) => state.words.cursorPosition,
   );
@@ -114,7 +117,7 @@ const useWriter = () => {
       writerMode === WriterMode.WordCount &&
       !words[cursorPosition.wordIndex + 1]
     ) {
-      dispatch(setIsFinished(true));
+      dispatch(setIsRunning(false));
       return;
     }
 
@@ -163,6 +166,10 @@ const useWriter = () => {
     dispatch(setWords(newWords));
   };
   const handleTextKeyPress = (e: KeyboardEvent) => {
+    if (!writerIsRunning) {
+      dispatch(setIsRunning(true));
+    }
+
     const currentWord: Word = words[cursorPosition.wordIndex];
 
     const nextLetterIsOutOfBounds: boolean =
@@ -226,6 +233,7 @@ const useWriter = () => {
     wrongKeyStrokes,
     allKeyStrokes,
     writerMode,
+    writerIsRunning,
   };
 };
 

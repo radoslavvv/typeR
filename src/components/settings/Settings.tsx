@@ -60,7 +60,7 @@ const Settings = () => {
           onClick={() =>
             dispatch(setPunctuationIsEnabled(!punctuationIsEnabled))
           }
-          className={`flex items-center justify-center gap-1 hover:text-customWhite duration-200${
+          className={`flex items-center justify-center gap-1 duration-200 hover:text-customWhite ${
             punctuationIsEnabled ? "text-lightBlue" : ""
           }`}
         >
