@@ -4,7 +4,7 @@ interface IWrapperProps {
 
 const Wrapper = ({ children }: IWrapperProps) => {
   return (
-    <div className="mx-auto flex h-screen w-9/12 flex-col justify-between">
+    <div className="mx-auto flex h-screen w-7/12 flex-col justify-between">
       {children}
     </div>
   );

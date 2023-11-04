@@ -10,7 +10,7 @@ interface IWordProps {
   wordIndex: number;
 }
 
-const Word = ({ word, wordIndex }: IWordProps) => {
+const Word = ({ word, wordIndex }: IWordProps): JSX.Element => {
   const cursorPosition: CursorPosition = useSelector(
     (state: RootState) => state.words.cursorPosition,
   );
@@ -24,11 +24,12 @@ const Word = ({ word, wordIndex }: IWordProps) => {
       {word.letters.map((c: Letter) => (
         <>
           <span
-            className={`border-1 border-solid border-transparent duration-300 ${
+            className={`border-1 border-solid duration-300 ${
               c.status === LetterStatus.Default
                 ? "untyped"
                 : c.status === LetterStatus.Wrong
-                ? "text-customRed border-customRed border-b"
+                ? // ? "border-b-2 border-solid border-customRed text-customRed"
+                  "text-customRed"
                 : "text-customWhite"
             }`}
           >
