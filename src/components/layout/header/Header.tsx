@@ -2,9 +2,9 @@ import { BsFillKeyboardFill } from "react-icons/bs";
 
 const Header = () => {
   return (
-    <header className="py-7 text-customWhite text-3xl font-medium">
-      <div className="flex justify-start items-center  gap-3">
-        <BsFillKeyboardFill className="text-lightBlue text-4xl" /> typeR
+    <header className="select-none py-7 text-3xl font-medium text-customWhite">
+      <div className="flex items-center justify-start  gap-3">
+        <BsFillKeyboardFill className="text-4xl text-lightBlue" /> typeR
       </div>
     </header>
   );

@@ -1,21 +1,30 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Word from "../../models/Word";
 import CursorPosition from "../../models/CursorPosition";
 
 interface IWordsState {
-  rawWords: string[];
+  isStarted: boolean;
+  isRunning: boolean;
+  isFinished: boolean;
 
   words: Word[];
   cursorPosition: CursorPosition;
-  writtenWord: Word | null;
+
+  correctKeyStrokes: number;
+  wrongKeyStrokes: number;
 }
 
 const initialState: IWordsState = {
-  rawWords: [],
+  isStarted: false,
+  isRunning: false,
+  isFinished: false,
 
   words: [],
   cursorPosition: new CursorPosition(0, 0),
-  writtenWord: null,
+
+  correctKeyStrokes: 0,
+  wrongKeyStrokes: 0,
 };
 
 export const WordsSlice = createSlice({
@@ -31,9 +40,24 @@ export const WordsSlice = createSlice({
         action.payload[1],
       );
     },
+    setCorrectKeyStrokes: (state, action: PayloadAction<number>) => {
+      state.correctKeyStrokes = action.payload;
+    },
+    setWrongKeyStrokes: (state, action: PayloadAction<number>) => {
+      state.wrongKeyStrokes = action.payload;
+    },
+    setIsFinished: (state, action: PayloadAction<boolean>) => {
+      state.isFinished = action.payload;
+    },
   },
 });
 
-export const { setWords, setCursorPosition } = WordsSlice.actions;
+export const {
+  setWords,
+  setCursorPosition,
+  setCorrectKeyStrokes,
+  setWrongKeyStrokes,
+  setIsFinished,
+} = WordsSlice.actions;
 
 export default WordsSlice;

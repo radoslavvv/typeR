@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import CursorPosition from "../../models/CursorPosition";
-import { RootState } from "../../store/Store";
+import CursorPosition from "../models/CursorPosition";
+import { RootState } from "../store/Store";
 
 const useCursor = () => {
   const cursorPosition: CursorPosition = useSelector(

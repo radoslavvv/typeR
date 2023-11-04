@@ -1,4 +1,4 @@
-import useCursor from "../../hooks/useCursor";
+import useCursor from "../../../hooks/useCursor";
 
 const Cursor = () => {
   const { cursorTop, cursorLeft } = useCursor();

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import CursorPosition from "../../../models/CursorPosition";
 import Letter from "../../../models/Letter";
-import LetterStatus from "../../../models/LetterStatus";
+import LetterStatus from "../../../models/enums/LetterStatus";
 import WordModel from "../../../models/Word";
 import { RootState } from "../../../store/Store";
 
@@ -17,7 +17,7 @@ const Word = ({ word, wordIndex }: IWordProps): JSX.Element => {
 
   return (
     <div
-      className={`text-2xl font-normal text-lightGray ${
+      className={`select-none text-2xl font-normal text-lightGray ${
         cursorPosition.wordIndex === wordIndex ? "activeWord" : ""
       }`}
     >

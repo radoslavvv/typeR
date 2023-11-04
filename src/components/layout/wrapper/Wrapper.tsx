@@ -4,7 +4,10 @@ interface IWrapperProps {
 
 const Wrapper = ({ children }: IWrapperProps) => {
   return (
-    <div className="mx-auto flex h-screen w-7/12 flex-col justify-between">
+    <div
+      className="mx-auto grid h-screen w-7/12 gap-3"
+      style={{ gridTemplateRows: "auto auto 1fr auto" }}
+    >
       {children}
     </div>
   );

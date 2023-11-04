@@ -1,4 +1,4 @@
-import LetterStatus from "./LetterStatus";
+import LetterStatus from "./enums/LetterStatus";
 
 export default class Letter {
   public content: string;
