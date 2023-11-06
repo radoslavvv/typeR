@@ -244,9 +244,12 @@ const useWriter = () => {
     if (writerMode === WriterMode.Quote) {
       randomWords = getRandomQuote(MOST_FAMOUS_QUOTES);
     } else {
+      const neededWordsCount: number =
+        writerMode === WriterMode.Time ? 999 : wordsCount;
+
       randomWords = getRandomWords(
         MOST_USED_WORDS,
-        wordsCount,
+        neededWordsCount,
         punctuationIsEnabled,
         numbersAreEnabled,
       );

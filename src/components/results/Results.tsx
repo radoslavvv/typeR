@@ -54,6 +54,8 @@ function Results() {
       result = `time/${secondsCount}s`;
     } else if (writerMode === WriterMode.WordCount) {
       result = `words/${wordsCount}`;
+    } else if (writerMode === WriterMode.Quote) {
+      result = `quote`;
     }
 
     return result;

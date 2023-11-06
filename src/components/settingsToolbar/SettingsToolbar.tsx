@@ -63,36 +63,36 @@ const SettingsToolbar = () => {
         writerIsRunning ? "invisible" : ""
       }`}
     >
-      {writerMode === WriterMode.WordCount ||
-        (writerMode === WriterMode.Time && (
-          <div className="flex gap-4">
-            <button
-              onClick={() =>
-                dispatch(setPunctuationIsEnabled(!punctuationIsEnabled))
-              }
-              className={`flex items-center justify-center gap-1 duration-200 hover:text-customWhite ${
-                punctuationIsEnabled ? "text-lightBlue" : ""
-              }`}
-            >
-              <BsFillPencilFill />
-              punctuation
-            </button>
-            <button
-              onClick={() => dispatch(setNumbersAreEnabled(!numbersAreEnabled))}
-              className={`flex items-center justify-center duration-200 hover:text-customWhite ${
-                numbersAreEnabled ? "text-lightBlue" : ""
-              }`}
-            >
-              <BsHash />
-              numbers
-            </button>
-          </div>
-        ))}
+      {(writerMode === WriterMode.WordCount ||
+        writerMode === WriterMode.Time) && (
+        <div className="flex gap-4">
+          <button
+            onClick={() =>
+              dispatch(setPunctuationIsEnabled(!punctuationIsEnabled))
+            }
+            className={`flex items-center justify-center gap-1 duration-200 hover:text-customWhite ${
+              punctuationIsEnabled ? "text-lightBlue" : ""
+            }`}
+          >
+            <BsFillPencilFill />
+            punctuation
+          </button>
+          <button
+            onClick={() => dispatch(setNumbersAreEnabled(!numbersAreEnabled))}
+            className={`flex items-center justify-center duration-200 hover:text-customWhite ${
+              numbersAreEnabled ? "text-lightBlue" : ""
+            }`}
+          >
+            <BsHash />
+            numbers
+          </button>
+        </div>
+      )}
 
-      {writerMode === WriterMode.WordCount ||
-        (writerMode === WriterMode.Time && (
-          <div className="w-0.5 bg-lightGray"></div>
-        ))}
+      {(writerMode === WriterMode.WordCount ||
+        writerMode === WriterMode.Time) && (
+        <div className="w-0.5 bg-lightGray"></div>
+      )}
 
       <div className="flex gap-4">
         <button
@@ -124,10 +124,10 @@ const SettingsToolbar = () => {
         </button>
       </div>
 
-      {writerMode === WriterMode.WordCount ||
-        (writerMode === WriterMode.Time && (
-          <div className="w-0.5 bg-lightGray"></div>
-        ))}
+      {(writerMode === WriterMode.WordCount ||
+        writerMode === WriterMode.Time) && (
+        <div className="w-0.5 bg-lightGray"></div>
+      )}
 
       {writerMode === WriterMode.WordCount && (
         <div className="flex gap-4">
