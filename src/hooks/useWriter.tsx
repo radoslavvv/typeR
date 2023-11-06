@@ -14,13 +14,14 @@ import {
 import LetterStatus from "../models/enums/LetterStatus";
 import Word from "../models/Word";
 import CursorPosition from "../models/CursorPosition";
-import { getRandomWords } from "../utils/Utilities";
+import { getRandomQuote, getRandomWords } from "../utils/Utilities";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../store/Store";
 import { MOST_USED_WORDS } from "../utils/words";
 import Letter from "../models/Letter";
 import WriterMode from "../models/enums/WriterMode";
 import moment from "moment";
+import { MOST_FAMOUS_QUOTES } from "../utils/quotes";
 
 const useWriter = () => {
   const dispatch = useAppDispatch();
@@ -58,12 +59,12 @@ const useWriter = () => {
   );
   const allKeyStrokes: number = correctKeyStrokes + wrongKeyStrokes;
 
-  const writerStartTime: moment.Moment | null = useSelector(
-    (state: RootState) => state.words.startTime,
-  );
-  const writerEndTime: moment.Moment | null = useSelector(
-    (state: RootState) => state.words.endTime,
-  );
+  // const writerStartTime: moment.Moment | null = useSelector(
+  //   (state: RootState) => state.words.startTime,
+  // );
+  // const writerEndTime: moment.Moment | null = useSelector(
+  //   (state: RootState) => state.words.endTime,
+  // );
 
   const getNewWordsAfterBackspacePress = (
     words: Word[],
@@ -181,7 +182,7 @@ const useWriter = () => {
 
     dispatch(setWords(newWords));
   };
-  const handleTextKeyPress = (e: KeyboardEvent) => {
+  const handleTextKeyPress = (e: KeyboardEvent, keyIsUppercase: boolean) => {
     if (!writerIsRunning) {
       dispatch(setIsRunning(true));
       dispatch(setIsFinished(false));
@@ -203,10 +204,11 @@ const useWriter = () => {
       ]),
     );
 
+    const pressedKey: string = keyIsUppercase ? e.key.toUpperCase() : e.key;
     const newWords: Word[] = getNewWordsAfterKeyPress(
       words,
       cursorPosition.wordIndex,
-      e.key,
+      pressedKey,
     );
 
     dispatch(setWords(newWords));
@@ -231,18 +233,25 @@ const useWriter = () => {
     } else if (e.code === "Backspace") {
       handleBackspacePress();
       return;
-    } else {
-      handleTextKeyPress(e);
+    } else if (e.key.length === 1) {
+      const keyIsUppercase: boolean = e.shiftKey;
+      handleTextKeyPress(e, keyIsUppercase);
     }
   };
 
   const generateWords = () => {
-    const randomWords: string[] = getRandomWords(
-      MOST_USED_WORDS,
-      wordsCount,
-      punctuationIsEnabled,
-      numbersAreEnabled,
-    );
+    let randomWords: string[] = [];
+    if (writerMode === WriterMode.Quote) {
+      randomWords = getRandomQuote(MOST_FAMOUS_QUOTES);
+    } else {
+      randomWords = getRandomWords(
+        MOST_USED_WORDS,
+        wordsCount,
+        punctuationIsEnabled,
+        numbersAreEnabled,
+      );
+    }
+
     const parsedWords: Word[] = randomWords.map((w) => new Word(w));
 
     dispatch(setWords(parsedWords));

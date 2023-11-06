@@ -29,7 +29,7 @@ const Word = ({ word, wordIndex }: IWordProps): JSX.Element => {
               ? "untyped"
               : c.status === LetterStatus.Wrong
               ? // ? "border-b-2 border-solid border-customRed text-customRed"
-                "text-customRed"
+                "border-b-2 border-solid border-customRed text-customRed"
               : "text-customWhite"
           }`}
         >

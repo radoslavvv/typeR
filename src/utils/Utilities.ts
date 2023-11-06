@@ -19,6 +19,16 @@ export const getRandomWords = (
   return randomWords;
 };
 
+export const getRandomQuote = (quotesArray: string[]): string[] => {
+  const randomQuoteIndex: number = generateRandomInteger(
+    0,
+    quotesArray.length - 1,
+  );
+
+  const quote: string = quotesArray[randomQuoteIndex];
+  return quote.split(" ");
+};
+
 const generateLetterRandomWords = (
   wordsArray: string[],
   wordsCount: number,
