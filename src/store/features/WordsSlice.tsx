@@ -2,11 +2,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Word from "../../models/Word";
 import CursorPosition from "../../models/CursorPosition";
+import * as moment from "moment";
 
 interface IWordsState {
   isStarted: boolean;
   isRunning: boolean;
   isFinished: boolean;
+
+  startTime: moment.Moment | null;
+  endTime: moment.Moment | null;
 
   words: Word[];
   cursorPosition: CursorPosition;
@@ -19,6 +23,9 @@ const initialState: IWordsState = {
   isStarted: false,
   isRunning: false,
   isFinished: false,
+
+  startTime: null,
+  endTime: null,
 
   words: [],
   cursorPosition: new CursorPosition(0, 0),
@@ -52,10 +59,19 @@ export const WordsSlice = createSlice({
     setIsFinished: (state, action: PayloadAction<boolean>) => {
       state.isFinished = action.payload;
     },
+    setStartTime: (state, action: PayloadAction<moment.Moment>) => {
+      state.startTime = action.payload;
+    },
+    setEndTime: (state, action: PayloadAction<moment.Moment>) => {
+      state.endTime = action.payload;
+    },
     reset: (state) => {
       state.isStarted = false;
       state.isRunning = false;
       state.isFinished = false;
+
+      state.startTime = null;
+      state.endTime = null;
 
       state.cursorPosition = new CursorPosition(0, 0);
 
@@ -63,6 +79,16 @@ export const WordsSlice = createSlice({
 
       state.correctKeyStrokes = 0;
       state.wrongKeyStrokes = 0;
+    },
+    start: (state) => {
+      state.isRunning = true;
+      state.isFinished = false;
+      state.startTime = moment();
+    },
+    end: (state) => {
+      state.isRunning = false;
+      state.isFinished = true;
+      state.endTime = moment();
     },
   },
 });
@@ -74,7 +100,11 @@ export const {
   setWrongKeyStrokes,
   setIsRunning,
   setIsFinished,
+  setStartTime,
+  setEndTime,
   reset,
+  start,
+  end,
 } = WordsSlice.actions;
 
 export default WordsSlice;

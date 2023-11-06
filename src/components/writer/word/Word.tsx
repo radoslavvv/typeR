@@ -21,21 +21,20 @@ const Word = ({ word, wordIndex }: IWordProps): JSX.Element => {
         cursorPosition.wordIndex === wordIndex ? "activeWord" : ""
       }`}
     >
-      {word.letters.map((c: Letter) => (
-        <>
-          <span
-            className={`border-1 border-solid duration-300 ${
-              c.status === LetterStatus.Default
-                ? "untyped"
-                : c.status === LetterStatus.Wrong
-                ? // ? "border-b-2 border-solid border-customRed text-customRed"
-                  "text-customRed"
-                : "text-customWhite"
-            }`}
-          >
-            {c.content}
-          </span>
-        </>
+      {word.letters.map((c: Letter, ci: number) => (
+        <span
+          key={c.content + ci}
+          className={`border-1 border-solid duration-300 ${
+            c.status === LetterStatus.Default
+              ? "untyped"
+              : c.status === LetterStatus.Wrong
+              ? // ? "border-b-2 border-solid border-customRed text-customRed"
+                "text-customRed"
+              : "text-customWhite"
+          }`}
+        >
+          {c.content}
+        </span>
       ))}
     </div>
   );

@@ -16,7 +16,7 @@ import {
   BsHash,
 } from "react-icons/bs";
 
-const Settings = () => {
+const SettingsToolbar = () => {
   const dispatch = useAppDispatch();
 
   const writerMode: WriterMode = useSelector(
@@ -119,8 +119,9 @@ const Settings = () => {
 
       {writerMode === WriterMode.WordCount && (
         <div className="flex gap-4">
-          {wordCountOptions.map((option: number) => (
+          {wordCountOptions.map((option: number, i: number) => (
             <button
+              key={option + i}
               className={`duration-200 hover:text-customWhite ${
                 wordsCount === option ? "text-lightBlue" : ""
               }`}
@@ -134,8 +135,9 @@ const Settings = () => {
 
       {writerMode === WriterMode.Time && (
         <div className="flex gap-4">
-          {secondsOptions.map((option: number) => (
+          {secondsOptions.map((option: number, i: number) => (
             <button
+              key={option + i}
               className={`duration-200 hover:text-customWhite ${
                 secondsCount === option ? "text-lightBlue" : ""
               }`}
@@ -150,4 +152,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default SettingsToolbar;

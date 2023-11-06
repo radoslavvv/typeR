@@ -47,7 +47,7 @@ const useCursor = () => {
   cursorTop += 5;
   cursorLeft -= 3;
 
-  return { cursorTop, cursorLeft };
+  return { cursorTop, cursorLeft, cursorPosition };
 };
 
 export default useCursor;

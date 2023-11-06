@@ -1,17 +1,25 @@
-// export const shuffleArray = (array: string[]): string[] => {
-//   const newArray = [...array];
-
-//   for (var i = newArray.length - 1; i > 0; i--) {
-//     var j = Math.floor(Math.random() * (i + 1));
-//     var temp = newArray[i];
-//     newArray[i] = newArray[j];
-//     newArray[j] = temp;
-//   }
-
-//   return newArray;
-// };
-
 export const getRandomWords = (
+  wordsArray: string[],
+  wordsCount: number,
+  punctuationIsEnabled: boolean,
+  numbersAreEnabled: boolean,
+): string[] => {
+  let randomWords: string[] = [];
+
+  if (!punctuationIsEnabled) {
+    randomWords = generateLetterRandomWords(wordsArray, wordsCount);
+  } else if (punctuationIsEnabled) {
+    randomWords = generatePunctuationRandomWords(wordsArray, wordsCount);
+  }
+
+  if (numbersAreEnabled) {
+    randomWords = addNumbersToRandomWords(randomWords);
+  }
+
+  return randomWords;
+};
+
+const generateLetterRandomWords = (
   wordsArray: string[],
   wordsCount: number,
 ): string[] => {
@@ -28,6 +36,92 @@ export const getRandomWords = (
   }
 
   return randomWords;
+};
+const generatePunctuationRandomWords = (
+  wordsArray: string[],
+  wordsCount: number,
+) => {
+  const remainingWordsCount: number = wordsCount;
+
+  while (remainingWordsCount > 0) {
+    const currentSentenceWordsCount: number = generateRandomInteger(
+      wordsCount,
+      remainingWordsCount,
+    );
+
+    const currentSentenceWords: string[] = [];
+    for (let i = 0; i < currentSentenceWordsCount; i++) {
+      const randomWordIndex: number = generateRandomInteger(
+        0,
+        wordsArray.length - 1,
+      );
+
+      const currentWord = wordsArray[randomWordIndex];
+      currentSentenceWords.push(currentWord);
+    }
+
+    const currentSentence: string =
+      generateRandomSentence(currentSentenceWords);
+    return currentSentence.split(" ");
+  }
+
+  const randomWords: string[] = [];
+
+  for (let i = 0; i < wordsCount; i++) {
+    const randomWordIndex: number = generateRandomInteger(
+      0,
+      wordsArray.length - 1,
+    );
+
+    const currentWord = wordsArray[randomWordIndex];
+    randomWords.push(currentWord);
+  }
+
+  return randomWords;
+};
+const addNumbersToRandomWords = (wordsArray: string[]) => {
+  const newWordsArray: string[] = [...wordsArray];
+
+  const numbersCount: number = generateRandomInteger(
+    newWordsArray.length / 3,
+    newWordsArray.length / 2,
+  );
+  for (let i = 0; i < numbersCount; i++) {
+    const randomWordIndex: number = generateRandomInteger(
+      0,
+      newWordsArray.length - 2,
+    );
+
+    const randomNumber: number = generateRandomInteger(0, 150);
+
+    newWordsArray[randomWordIndex] = randomNumber.toString();
+  }
+
+  return newWordsArray;
+};
+const generateRandomSentence = (wordsArray: string[]): string => {
+  const sentenceEndPunctuationMarks: string[] = [".", "!", "?"];
+  let dummyText: string = "";
+
+  const sentence = wordsArray
+    .map((word, index) => {
+      if (index === 0) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      } else if (index % 3 === 0 && index != wordsArray.length - 1) {
+        return word + ",";
+      } else {
+        return word;
+      }
+    })
+    .join(" ");
+
+  const randomSentenceEndPunctuation: string =
+    sentenceEndPunctuationMarks[
+      Math.floor(Math.random() * sentenceEndPunctuationMarks.length)
+    ];
+  dummyText += `${sentence}${randomSentenceEndPunctuation}`;
+
+  return dummyText.trim();
 };
 
 export const generateRandomInteger = (

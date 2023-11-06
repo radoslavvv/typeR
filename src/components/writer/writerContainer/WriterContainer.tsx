@@ -1,10 +1,11 @@
 import useWriter from "../../../hooks/useWriter";
 import WriterMode from "../../../models/enums/WriterMode";
 import WordCounter from "../../countdown/wordCounter/WordCounter";
-import Settings from "../../settings/Settings";
+import SettingsToolbar from "../../settingsToolbar/SettingsToolbar";
 import Cursor from "../cursor/Cursor";
 import WordsList from "../wordsList/WordsList";
 import Word from "../../../models/Word";
+import ResetButton from "../resetButton/ResetButton";
 
 const WriterContainer = () => {
   const { writerMode, words } = useWriter();
@@ -13,7 +14,7 @@ const WriterContainer = () => {
 
   return (
     <>
-      <Settings />
+      <SettingsToolbar />
 
       <div
         key={JSON.stringify(rawWords)}
@@ -23,6 +24,8 @@ const WriterContainer = () => {
         <WordsList words={words} />
         <Cursor />
       </div>
+
+      <ResetButton />
     </>
   );
 };
