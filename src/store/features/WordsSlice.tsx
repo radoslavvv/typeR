@@ -49,6 +49,21 @@ export const WordsSlice = createSlice({
     setIsRunning: (state, action: PayloadAction<boolean>) => {
       state.isRunning = action.payload;
     },
+    setIsFinished: (state, action: PayloadAction<boolean>) => {
+      state.isFinished = action.payload;
+    },
+    reset: (state) => {
+      state.isStarted = false;
+      state.isRunning = false;
+      state.isFinished = false;
+
+      state.cursorPosition = new CursorPosition(0, 0);
+
+      state.words = [];
+
+      state.correctKeyStrokes = 0;
+      state.wrongKeyStrokes = 0;
+    },
   },
 });
 
@@ -58,6 +73,8 @@ export const {
   setCorrectKeyStrokes,
   setWrongKeyStrokes,
   setIsRunning,
+  setIsFinished,
+  reset,
 } = WordsSlice.actions;
 
 export default WordsSlice;

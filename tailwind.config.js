@@ -27,9 +27,15 @@ export default {
           "0%": { opacity: "0" },
           "100%": { opacity: "100" },
         },
+        logoHover: {
+          "0%": { gap: "0.75rem" },
+          "75%": { gap: "1.25rem" },
+          "100%": { gap: "0.75rem" },
+        },
       },
       animation: {
         fadeIn: "fadeIn 0.3s ease-in-out forwards",
+        logoHover: "logoHover 0.3s ease-in-out forwards",
       },
     },
   },

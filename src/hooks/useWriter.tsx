@@ -3,6 +3,7 @@ import React from "react";
 import {
   setCorrectKeyStrokes,
   setCursorPosition,
+  setIsFinished,
   setIsRunning,
   setWords,
   setWrongKeyStrokes,
@@ -35,6 +36,9 @@ const useWriter = () => {
 
   const writerIsRunning: boolean = useSelector(
     (state: RootState) => state.words.isRunning,
+  );
+  const writerIsFinished: boolean = useSelector(
+    (state: RootState) => state.words.isFinished,
   );
   const cursorPosition: CursorPosition = useSelector(
     (state: RootState) => state.words.cursorPosition,
@@ -118,7 +122,7 @@ const useWriter = () => {
       !words[cursorPosition.wordIndex + 1]
     ) {
       dispatch(setIsRunning(false));
-      return;
+      dispatch(setIsFinished(true));
     }
 
     dispatch(setCursorPosition([cursorPosition.wordIndex + 1, 0]));
@@ -168,6 +172,7 @@ const useWriter = () => {
   const handleTextKeyPress = (e: KeyboardEvent) => {
     if (!writerIsRunning) {
       dispatch(setIsRunning(true));
+      dispatch(setIsFinished(false));
     }
 
     const currentWord: Word = words[cursorPosition.wordIndex];
@@ -192,6 +197,17 @@ const useWriter = () => {
     );
 
     dispatch(setWords(newWords));
+
+    if (
+      cursorPosition.letterIndex === currentWord.letters.length - 1 &&
+      cursorPosition.wordIndex === words.length - 1 &&
+      !newWords[cursorPosition.wordIndex].letters.some(
+        (l: Letter) => l.status === LetterStatus.Wrong,
+      )
+    ) {
+      dispatch(setIsFinished(true));
+      dispatch(setIsRunning(false));
+    }
   };
 
   const handleKeyPress = (e: KeyboardEvent) => {
@@ -206,11 +222,21 @@ const useWriter = () => {
     }
   };
 
-  React.useEffect(() => {
+  const generateWords = () => {
     const randomWords: string[] = getRandomWords(MOST_USED_WORDS, wordsCount);
     const parsedWords: Word[] = randomWords.map((w) => new Word(w));
 
     dispatch(setWords(parsedWords));
+  };
+
+  React.useEffect(() => {
+    if (!writerIsRunning && words.length === 0) {
+      generateWords();
+    }
+  }, [writerIsRunning, words]);
+
+  React.useEffect(() => {
+    generateWords();
   }, [wordsCount, writerMode, punctuationIsEnabled, numbersAreEnabled]);
 
   React.useEffect(() => {
@@ -234,6 +260,7 @@ const useWriter = () => {
     allKeyStrokes,
     writerMode,
     writerIsRunning,
+    writerIsFinished,
   };
 };
 

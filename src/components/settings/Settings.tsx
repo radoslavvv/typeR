@@ -37,6 +37,10 @@ const Settings = () => {
     (state: RootState) => state.settings.secondsCount,
   );
 
+  const writerIsRunning: boolean = useSelector(
+    (state: RootState) => state.words.isRunning,
+  );
+
   const handleWriterModeChange = (newWriterMode: WriterMode) => {
     dispatch(setWriterMode(newWriterMode));
   };
@@ -49,12 +53,16 @@ const Settings = () => {
     dispatch(setSecondsCount(newSecondsCount));
   };
 
-  const wordCountOptions: number[] = [10, 25, 50, 100, 200];
+  const wordCountOptions: number[] = [5, 10, 25, 50, 100, 200];
 
   const secondsOptions: number[] = [15, 30, 60, 120, 180];
 
   return (
-    <div className="mx-auto flex w-auto select-none gap-4 self-center rounded-lg bg-darkBlue px-7 py-2 text-lightGray transition-all duration-200 ">
+    <div
+      className={`mx-auto flex w-auto animate-fadeIn select-none flex-col gap-4 self-center rounded-lg bg-darkBlue px-7 py-2 text-lightGray transition-all duration-200 md:flex-row ${
+        writerIsRunning ? "invisible" : ""
+      }`}
+    >
       <div className="flex gap-4">
         <button
           onClick={() =>
