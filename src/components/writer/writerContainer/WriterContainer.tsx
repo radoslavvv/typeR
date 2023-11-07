@@ -20,7 +20,8 @@ const WriterContainer = () => {
         key={JSON.stringify(rawWords)}
         className="mt-20 flex animate-fadeIn flex-col justify-start md:mt-52"
       >
-        {writerMode === WriterMode.WordCount && <WordCounter />}
+        {(writerMode === WriterMode.WordCount ||
+          writerMode === WriterMode.Quote) && <WordCounter />}
         <WordsList words={words} />
         <Cursor />
       </div>

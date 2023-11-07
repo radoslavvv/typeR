@@ -12,7 +12,7 @@ const WordCounter = () => {
 
   return (
     <div className="mb-1 select-none text-2xl text-lightBlue">
-      {cursorPosition.wordIndex}/{words.length}
+      {cursorPosition.allWordsIndex}/{words.length}
     </div>
   );
 };

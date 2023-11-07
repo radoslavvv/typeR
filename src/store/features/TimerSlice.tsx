@@ -13,7 +13,7 @@ interface ITimerState {
 
 const initialState: ITimerState = {
   words: [],
-  cursorPosition: new CursorPosition(0, 0),
+  cursorPosition: new CursorPosition(0, 0, 0, 0),
 
   correctKeyStrokes: 0,
   wrongKeyStrokes: 0,

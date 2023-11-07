@@ -28,7 +28,7 @@ const initialState: IWordsState = {
   endTime: null,
 
   words: [],
-  cursorPosition: new CursorPosition(0, 0),
+  cursorPosition: new CursorPosition(0, 0, 0, 0),
 
   correctKeyStrokes: 0,
   wrongKeyStrokes: 0,
@@ -45,6 +45,8 @@ export const WordsSlice = createSlice({
       state.cursorPosition = new CursorPosition(
         action.payload[0],
         action.payload[1],
+        action.payload[2],
+        action.payload[3],
       );
     },
     setCorrectKeyStrokes: (state, action: PayloadAction<number>) => {
@@ -73,7 +75,7 @@ export const WordsSlice = createSlice({
       state.startTime = null;
       state.endTime = null;
 
-      state.cursorPosition = new CursorPosition(0, 0);
+      state.cursorPosition = new CursorPosition(0, 0, 0, 0);
 
       state.words = [];
 

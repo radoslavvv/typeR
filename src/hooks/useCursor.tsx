@@ -9,7 +9,7 @@ const useCursor = () => {
 
   const wordsListElement: Element = document.querySelectorAll(".wordsList")[0];
   const currentActiveWordElement: Element =
-    document.querySelectorAll(".wordsList > div")[cursorPosition.wordIndex];
+    document.querySelectorAll(".wordsList .word")[cursorPosition.allWordsIndex];
 
   let cursorTop: number = 0;
   let cursorLeft: number = 0;

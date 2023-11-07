@@ -14,7 +14,12 @@ import {
 import LetterStatus from "../models/enums/LetterStatus";
 import Word from "../models/Word";
 import CursorPosition from "../models/CursorPosition";
-import { getRandomQuote, getRandomWords } from "../utils/Utilities";
+import {
+  getRandomQuote,
+  getRandomWords,
+  getWordRowIndex,
+  hideFinishedRows,
+} from "../utils/Utilities";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../store/Store";
 import { MOST_USED_WORDS } from "../utils/words";
@@ -120,7 +125,7 @@ const useWriter = () => {
   };
 
   const handleSpacePress = () => {
-    const currentWord: Word = words[cursorPosition.wordIndex];
+    const currentWord: Word = words[cursorPosition.allWordsIndex];
     const currentWordHasUnwrittenWords: boolean = currentWord.letters.some(
       (l: Letter) => l.status === LetterStatus.Default,
     );
@@ -131,19 +136,34 @@ const useWriter = () => {
 
     if (
       writerMode === WriterMode.WordCount &&
-      !words[cursorPosition.wordIndex + 1]
+      !words[cursorPosition.allWordsIndex + 1]
     ) {
       dispatch(setIsRunning(false));
       dispatch(setIsFinished(true));
       dispatch(setEndTime(moment()));
     }
 
-    dispatch(setCursorPosition([cursorPosition.wordIndex + 1, 0]));
+    const rowIndex: number = getWordRowIndex(cursorPosition.allWordsIndex + 1);
+    if (rowIndex > cursorPosition.rowIndex) {
+      dispatch(
+        setCursorPosition([cursorPosition.allWordsIndex + 1, 0, 0, rowIndex]),
+      );
+      hideFinishedRows(rowIndex);
+    } else {
+      dispatch(
+        setCursorPosition([
+          cursorPosition.allWordsIndex + 1,
+          cursorPosition.currentRowWordIndex + 1,
+          0,
+          rowIndex,
+        ]),
+      );
+    }
   };
   const handleBackspacePress = () => {
-    let newCursorPosition: CursorPosition = new CursorPosition(0, 0);
+    let newCursorPosition: CursorPosition = new CursorPosition(0, 0, 0, 0);
     if (cursorPosition.letterIndex === 0) {
-      const previousWord: Word = words[cursorPosition.wordIndex - 1];
+      const previousWord: Word = words[cursorPosition.allWordsIndex - 1];
       const previousWordIsCorrect: boolean =
         previousWord &&
         !previousWord.letters.some(
@@ -156,27 +176,43 @@ const useWriter = () => {
         return;
       }
 
-      newCursorPosition = new CursorPosition(
-        Math.max(cursorPosition.wordIndex - 1, 0),
-        words[Math.max(cursorPosition.wordIndex - 1, 0)].letters.length,
+      const previousWordRowIndex: number = getWordRowIndex(
+        cursorPosition.allWordsIndex - 1,
       );
+
+      if (previousWordRowIndex < cursorPosition.rowIndex) {
+        newCursorPosition = new CursorPosition(
+          Math.max(cursorPosition.allWordsIndex - 1, 0),
+          Math.max(cursorPosition.currentRowWordIndex - 1, 0),
+          words[Math.max(cursorPosition.allWordsIndex - 1, 0)].letters.length,
+          previousWordRowIndex,
+        );
+      }
     } else {
+      const currentWordRowIndex: number = getWordRowIndex(
+        cursorPosition.allWordsIndex,
+      );
+
       newCursorPosition = new CursorPosition(
-        cursorPosition.wordIndex,
+        cursorPosition.allWordsIndex,
+        cursorPosition.currentRowWordIndex,
         Math.max(cursorPosition.letterIndex - 1, 0),
+        currentWordRowIndex,
       );
     }
 
     dispatch(
       setCursorPosition([
-        newCursorPosition.wordIndex,
+        newCursorPosition.allWordsIndex,
+        newCursorPosition.currentRowWordIndex,
         newCursorPosition.letterIndex,
+        newCursorPosition.rowIndex,
       ]),
     );
 
     const newWords: Word[] = getNewWordsAfterBackspacePress(
       words,
-      newCursorPosition.wordIndex,
+      newCursorPosition.allWordsIndex,
       newCursorPosition.letterIndex,
     );
 
@@ -189,7 +225,7 @@ const useWriter = () => {
       dispatch(setStartTime(moment()));
     }
 
-    const currentWord: Word = words[cursorPosition.wordIndex];
+    const currentWord: Word = words[cursorPosition.allWordsIndex];
 
     const nextLetterIsOutOfBounds: boolean =
       cursorPosition.letterIndex + 1 > currentWord.letters.length;
@@ -199,15 +235,17 @@ const useWriter = () => {
 
     dispatch(
       setCursorPosition([
-        cursorPosition.wordIndex,
+        cursorPosition.allWordsIndex,
+        cursorPosition.currentRowWordIndex,
         cursorPosition.letterIndex + 1,
+        cursorPosition.rowIndex,
       ]),
     );
 
     const pressedKey: string = keyIsUppercase ? e.key.toUpperCase() : e.key;
     const newWords: Word[] = getNewWordsAfterKeyPress(
       words,
-      cursorPosition.wordIndex,
+      cursorPosition.allWordsIndex,
       pressedKey,
     );
 
@@ -215,8 +253,8 @@ const useWriter = () => {
 
     if (
       cursorPosition.letterIndex === currentWord.letters.length - 1 &&
-      cursorPosition.wordIndex === words.length - 1 &&
-      !newWords[cursorPosition.wordIndex].letters.some(
+      cursorPosition.allWordsIndex === words.length - 1 &&
+      !newWords[cursorPosition.allWordsIndex].letters.some(
         (l: Letter) => l.status === LetterStatus.Wrong,
       )
     ) {

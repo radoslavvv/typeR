@@ -140,3 +140,36 @@ export const generateRandomInteger = (
 ): number => {
   return Math.floor(minNumber + Math.random() * (maxNumber - minNumber + 1));
 };
+
+export const getWordWidth = (word: string): number => {
+  const canvas = document.createElement("canvas");
+
+  const context = canvas.getContext("2d");
+  if (context) {
+    context.font = `1.5rem Roboto Slab`;
+
+    const textMetrics = context.measureText(word);
+    return textMetrics.width;
+  }
+
+  return 0;
+};
+
+export const getWordRowIndex = (wordIndex: number): number => {
+  const nextWordElement: Element =
+    document.querySelectorAll(".wordsList .word")[wordIndex];
+  const rowIndex: number = Number(
+    nextWordElement.getAttribute("row-index") || "",
+  );
+
+  return rowIndex;
+};
+
+export const hideFinishedRows = (currentRowIndex: number): void => {
+  const rowElements: NodeListOf<Element> =
+    document.querySelectorAll(".wordsList .row");
+
+  for (let i = currentRowIndex - 2; i < currentRowIndex - 1; i++) {
+    rowElements[i].style.display = "none";
+  }
+};

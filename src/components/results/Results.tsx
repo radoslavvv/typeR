@@ -2,6 +2,9 @@ import { useSelector } from "react-redux";
 import WriterMode from "../../models/enums/WriterMode";
 import { RootState } from "../../store/Store";
 import moment from "moment";
+import Word from "../../models/Word";
+import Letter from "../../models/Letter";
+import LetterStatus from "../../models/enums/LetterStatus";
 
 function Results() {
   const writerMode: WriterMode = useSelector(
@@ -48,6 +51,15 @@ function Results() {
     (correctKeyStrokes / allKeyStrokes) * 100,
   );
 
+  const words: Word[] = useSelector((state: RootState) => state.words.words);
+  const correctWords: Word[] = words.filter(
+    (w: Word) =>
+      !w.letters.some((l: Letter) => l.status === LetterStatus.Wrong),
+  );
+  const wrongWords: Word[] = words.filter((w: Word) =>
+    w.letters.some((l: Letter) => l.status === LetterStatus.Wrong),
+  );
+
   const getTestType = (): string => {
     let result: string = "";
     if (writerMode === WriterMode.Time) {
@@ -82,7 +94,7 @@ function Results() {
           <div className="flex flex-col">
             <p className="text-l text-lightGray">words</p>
             <p className="text-2xl text-lightBlue">
-              {allKeyStrokes} ({correctKeyStrokes}/{wrongKeyStrokes})
+              {words.length} ({correctWords.length}/{wrongWords.length})
             </p>
           </div>
           <div className="flex flex-col">

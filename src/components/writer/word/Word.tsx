@@ -8,18 +8,23 @@ import { RootState } from "../../../store/Store";
 interface IWordProps {
   word: WordModel;
   wordIndex: number;
+  rowIndex: number;
 }
 
-const Word = ({ word, wordIndex }: IWordProps): JSX.Element => {
+const Word = ({ word, wordIndex, rowIndex }: IWordProps): JSX.Element => {
   const cursorPosition: CursorPosition = useSelector(
     (state: RootState) => state.words.cursorPosition,
   );
 
   return (
     <div
-      className={`select-none text-2xl font-normal text-lightGray ${
-        cursorPosition.wordIndex === wordIndex ? "activeWord" : ""
+      className={`word relative select-none text-2xl font-normal text-lightGray duration-300 ${
+        cursorPosition.currentRowWordIndex === wordIndex &&
+        cursorPosition.rowIndex === rowIndex
+          ? "activeWord"
+          : ""
       }`}
+      row-index={rowIndex}
     >
       {word.letters.map((c: Letter, ci: number) => (
         <span

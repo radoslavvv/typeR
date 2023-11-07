@@ -5,7 +5,7 @@ const Cursor = () => {
 
   return (
     <span
-      className="absolute h-6 rounded-full border border-solid border-lightBlue duration-200"
+      className="absolute h-6 rounded-full border border-solid border-lightBlue duration-300"
       style={{ top: cursorTop, left: cursorLeft }}
     ></span>
   );
