@@ -12,10 +12,10 @@ const ResetButton = () => {
   return (
     <div>
       <div
-        className="mx-auto mt-10 flex justify-start "
+        className="mx-auto mt-10 flex w-6 cursor-pointer justify-start"
         onClick={handleResetButtonClick}
       >
-        <BsArrowClockwise className="duration-250 mx-auto mt-10 flex justify-start text-2xl font-bold text-lightGray transition-all hover:scale-125" />
+        <BsArrowClockwise className="duration-250 mx-auto mt-10 flex justify-start text-2xl font-bold text-lightGray transition-all hover:scale-125 hover:text-customWhite" />
       </div>
     </div>
   );

@@ -166,7 +166,7 @@ export const getWordRowIndex = (wordIndex: number): number => {
 };
 
 export const hideFinishedRows = (currentRowIndex: number): void => {
-  const rowElements: NodeListOf<Element> =
+  const rowElements: NodeListOf<HTMLElement> =
     document.querySelectorAll(".wordsList .row");
 
   for (let i = currentRowIndex - 2; i < currentRowIndex - 1; i++) {

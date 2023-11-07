@@ -57,15 +57,13 @@ const SettingsToolbar = () => {
 
   const secondsOptions: number[] = [15, 30, 60, 120, 180];
 
-  return (
+  return !writerIsRunning ? (
     <div
-      className={`mx-auto flex w-auto animate-fadeIn select-none flex-col gap-4 self-center rounded-lg bg-darkBlue px-7 py-2 text-lightGray transition-all duration-200 md:flex-row ${
-        writerIsRunning ? "invisible" : ""
-      }`}
+      className={`mx-auto flex w-auto animate-fadeIn select-none flex-col gap-4 self-center rounded-lg bg-darkBlue  py-2 text-lightGray transition-all duration-200 lg:flex-row lg:px-7`}
     >
       {(writerMode === WriterMode.WordCount ||
         writerMode === WriterMode.Time) && (
-        <div className="flex gap-4">
+        <div className="flex justify-center gap-4 lg:px-0">
           <button
             onClick={() =>
               dispatch(setPunctuationIsEnabled(!punctuationIsEnabled))
@@ -94,7 +92,7 @@ const SettingsToolbar = () => {
         <div className="w-0.5 bg-lightGray"></div>
       )}
 
-      <div className="flex gap-4">
+      <div className="flex justify-center gap-4 px-20 lg:px-0">
         <button
           className={`flex items-center justify-center gap-1 duration-200 hover:text-customWhite ${
             writerMode === WriterMode.Time ? "text-lightBlue" : ""
@@ -130,7 +128,7 @@ const SettingsToolbar = () => {
       )}
 
       {writerMode === WriterMode.WordCount && (
-        <div className="flex gap-4">
+        <div className="flex justify-center gap-4 px-7 lg:px-0">
           {wordCountOptions.map((option: number, i: number) => (
             <button
               key={option + i}
@@ -146,7 +144,7 @@ const SettingsToolbar = () => {
       )}
 
       {writerMode === WriterMode.Time && (
-        <div className="flex gap-4">
+        <div className="flex justify-center gap-4 lg:px-0">
           {secondsOptions.map((option: number, i: number) => (
             <button
               key={option + i}
@@ -161,6 +159,8 @@ const SettingsToolbar = () => {
         </div>
       )}
     </div>
+  ) : (
+    <div className="h-10"></div>
   );
 };
 

@@ -189,15 +189,11 @@ const useWriter = () => {
         );
       }
     } else {
-      const currentWordRowIndex: number = getWordRowIndex(
-        cursorPosition.allWordsIndex,
-      );
-
       newCursorPosition = new CursorPosition(
         cursorPosition.allWordsIndex,
         cursorPosition.currentRowWordIndex,
         Math.max(cursorPosition.letterIndex - 1, 0),
-        currentWordRowIndex,
+        cursorPosition.rowIndex,
       );
     }
 
