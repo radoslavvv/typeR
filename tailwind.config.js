@@ -32,10 +32,30 @@ export default {
           "75%": { gap: "1.25rem" },
           "100%": { gap: "0.75rem" },
         },
+        slideDown: {
+          "0%": { transform: "translateY(-250px)", opacity: "0" },
+          "100%": { transform: "translateY(0px)", opacity: "1" },
+        },
+        slideLeft: {
+          "0%": { transform: "translateX(-250px)", opacity: "0" },
+          "100%": { transform: "translateX(0px)", opacity: "1" },
+        },
+        slideRight: {
+          "0%": { transform: "translateX(250px)", opacity: "0" },
+          "100%": { transform: "translateX(0px)", opacity: "1" },
+        },
+        slideUp: {
+          "0%": { transform: "translateY(250px)", opacity: "0" },
+          "100%": { transform: "translateY(0px)", opacity: "1" },
+        },
       },
       animation: {
         fadeIn: "fadeIn 0.3s ease-in-out forwards",
         logoHover: "logoHover 0.3s ease-in-out forwards",
+        slideDown: "slideDown 0.5s ease-in-out forwards",
+        slideLeft: "slideLeft 0.5s ease-in-out forwards",
+        slideRight: "slideRight 0.5s ease-in-out forwards",
+        slideUp: "slideUp 0.5s ease-in-out forwards",
       },
     },
   },

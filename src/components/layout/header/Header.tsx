@@ -11,7 +11,7 @@ const Header = () => {
   };
 
   return (
-    <header className="select-none py-7 text-3xl font-medium text-customWhite">
+    <header className="animate-slideDown select-none py-7 text-3xl font-medium text-customWhite opacity-0">
       <div
         onClick={handleLogoClick}
         className="flex cursor-pointer items-center  justify-start gap-3 hover:animate-logoHover"

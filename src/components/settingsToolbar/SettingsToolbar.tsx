@@ -62,9 +62,10 @@ const SettingsToolbar = () => {
 
   return (
     <div
-      className={`mx-auto flex w-auto animate-fadeIn select-none flex-col gap-4 self-center rounded-lg bg-darkBlue  py-2 text-lightGray transition-all duration-200 lg:flex-row lg:px-7 ${
+      className={`animate-slideLeft mx-auto flex w-auto animate-fadeIn select-none flex-col gap-4 self-center rounded-lg bg-darkBlue py-2  text-lightGray opacity-0 transition-all duration-200 lg:flex-row lg:px-7 ${
         writerIsRunning ? "blur-[1px]" : ""
       }`}
+      style={{ animationDelay: "0.5s" }}
     >
       {(writerMode === WriterMode.WordCount ||
         writerMode === WriterMode.Time) && (
