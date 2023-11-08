@@ -30,6 +30,7 @@ import {
 
 import { MOST_USED_WORDS } from "../data/words";
 import { MOST_FAMOUS_QUOTES } from "../data/quotes";
+import { WORDS_PER_SECOND_MULTIPLIER } from "../utils/constants";
 
 const useWriter = () => {
   const dispatch = useAppDispatch();
@@ -265,7 +266,9 @@ const useWriter = () => {
       randomWords = getRandomQuote(MOST_FAMOUS_QUOTES);
     } else {
       const neededWordsCount: number =
-        writerMode === WriterMode.Time ? secondsCount * 3 : wordsCount;
+        writerMode === WriterMode.Time
+          ? secondsCount * WORDS_PER_SECOND_MULTIPLIER
+          : wordsCount;
 
       randomWords = getRandomWords(
         MOST_USED_WORDS,

@@ -18,6 +18,11 @@ import {
 
 import WriterMode from "../../models/enums/WriterMode";
 
+import {
+  SECONDS_COUNT_OPTIONS,
+  WORD_COUNT_OPTIONS,
+} from "../../utils/constants";
+
 const SettingsToolbar = () => {
   const dispatch = useAppDispatch();
 
@@ -54,10 +59,6 @@ const SettingsToolbar = () => {
   const handleSecondsCountChange = (newSecondsCount: number) => {
     dispatch(setSecondsCount(newSecondsCount));
   };
-
-  const wordCountOptions: number[] = [15, 25, 50, 100];
-
-  const secondsOptions: number[] = [5, 15, 30, 60, 120];
 
   return (
     <div
@@ -138,7 +139,7 @@ const SettingsToolbar = () => {
 
       {writerMode === WriterMode.WordCount && (
         <div className="flex justify-center gap-4 px-7 lg:px-0">
-          {wordCountOptions.map((option: number, i: number) => (
+          {WORD_COUNT_OPTIONS.map((option: number, i: number) => (
             <button
               key={option + i}
               disabled={writerIsRunning}
@@ -155,7 +156,7 @@ const SettingsToolbar = () => {
 
       {writerMode === WriterMode.Time && (
         <div className="flex justify-center gap-4 lg:px-0">
-          {secondsOptions.map((option: number, i: number) => (
+          {SECONDS_COUNT_OPTIONS.map((option: number, i: number) => (
             <button
               key={option + i}
               disabled={writerIsRunning}

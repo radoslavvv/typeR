@@ -8,6 +8,8 @@ import Letter from "../../models/Letter";
 import WriterMode from "../../models/enums/WriterMode";
 import LetterStatus from "../../models/enums/LetterStatus";
 
+import { SECONDS_IN_MINUTE } from "../../utils/constants";
+
 function Results() {
   const writerMode: WriterMode = useSelector(
     (state: RootState) => state.settings.writerMode,
@@ -39,7 +41,7 @@ function Results() {
   );
 
   const wordsPerMinute: number = Math.floor(
-    allKeyStrokes / 5 / (timePassedInSeconds / 60),
+    allKeyStrokes / 5 / (timePassedInSeconds / SECONDS_IN_MINUTE),
   );
 
   const accuracy: number = Math.floor(

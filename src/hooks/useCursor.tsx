@@ -4,6 +4,11 @@ import { RootState } from "../store/Store";
 
 import CursorPosition from "../models/CursorPosition";
 
+import {
+  CURSOR_LEFT_CORRECTION,
+  CURSOR_TOP_CORRECTION,
+} from "../utils/constants";
+
 const useCursor = () => {
   const cursorPosition: CursorPosition = useSelector(
     (state: RootState) => state.words.cursorPosition,
@@ -46,8 +51,8 @@ const useCursor = () => {
     cursorLeft = leftValue;
   }
 
-  cursorTop += 7;
-  cursorLeft -= 3;
+  cursorTop += CURSOR_TOP_CORRECTION;
+  cursorLeft -= CURSOR_LEFT_CORRECTION;
 
   return { cursorTop, cursorLeft, cursorPosition };
 };
