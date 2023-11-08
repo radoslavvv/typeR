@@ -15,6 +15,8 @@ interface IWordsState {
   words: Word[];
   cursorPosition: CursorPosition;
 
+  remainingSeconds: number;
+
   correctKeyStrokes: number;
   wrongKeyStrokes: number;
 }
@@ -29,6 +31,8 @@ const initialState: IWordsState = {
 
   words: [],
   cursorPosition: new CursorPosition(0, 0, 0, 0),
+
+  remainingSeconds: 60,
 
   correctKeyStrokes: 0,
   wrongKeyStrokes: 0,
@@ -67,6 +71,9 @@ export const WordsSlice = createSlice({
     setEndTime: (state, action: PayloadAction<moment.Moment>) => {
       state.endTime = action.payload;
     },
+    setRemainingSeconds: (state, action: PayloadAction<number>) => {
+      state.remainingSeconds = action.payload;
+    },
     reset: (state) => {
       state.isStarted = false;
       state.isRunning = false;
@@ -78,6 +85,8 @@ export const WordsSlice = createSlice({
       state.cursorPosition = new CursorPosition(0, 0, 0, 0);
 
       state.words = [];
+
+      state.remainingSeconds = 60;
 
       state.correctKeyStrokes = 0;
       state.wrongKeyStrokes = 0;
@@ -104,6 +113,7 @@ export const {
   setIsFinished,
   setStartTime,
   setEndTime,
+  setRemainingSeconds,
   reset,
   start,
   end,

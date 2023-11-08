@@ -6,6 +6,7 @@ import Cursor from "../cursor/Cursor";
 import WordsList from "../wordsList/WordsList";
 import Word from "../../../models/Word";
 import ResetButton from "../resetButton/ResetButton";
+import Timer from "../../countdown/timer/Timer";
 
 const WriterContainer = () => {
   const { writerMode, words } = useWriter();
@@ -22,6 +23,8 @@ const WriterContainer = () => {
       >
         {(writerMode === WriterMode.WordCount ||
           writerMode === WriterMode.Quote) && <WordCounter />}
+        {writerMode === WriterMode.Time && <Timer />}
+
         <WordsList words={words} />
         <Cursor />
       </div>

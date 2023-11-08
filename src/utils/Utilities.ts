@@ -16,6 +16,7 @@ export const getRandomWords = (
     randomWords = addNumbersToRandomWords(randomWords);
   }
 
+  console.log(randomWords);
   return randomWords;
 };
 
@@ -51,11 +52,13 @@ const generatePunctuationRandomWords = (
   wordsArray: string[],
   wordsCount: number,
 ) => {
-  const remainingWordsCount: number = wordsCount;
+  let randomWords: string[] = [];
+
+  let remainingWordsCount: number = wordsCount;
 
   while (remainingWordsCount > 0) {
-    const currentSentenceWordsCount: number = generateRandomInteger(
-      wordsCount,
+    const currentSentenceWordsCount: number = Math.min(
+      generateRandomInteger(1, 10),
       remainingWordsCount,
     );
 
@@ -72,19 +75,10 @@ const generatePunctuationRandomWords = (
 
     const currentSentence: string =
       generateRandomSentence(currentSentenceWords);
-    return currentSentence.split(" ");
-  }
 
-  const randomWords: string[] = [];
+    randomWords = [...randomWords, ...currentSentence.split(" ")];
 
-  for (let i = 0; i < wordsCount; i++) {
-    const randomWordIndex: number = generateRandomInteger(
-      0,
-      wordsArray.length - 1,
-    );
-
-    const currentWord = wordsArray[randomWordIndex];
-    randomWords.push(currentWord);
+    remainingWordsCount -= currentSentence.split(" ").length;
   }
 
   return randomWords;
@@ -146,7 +140,7 @@ export const getWordWidth = (word: string): number => {
 
   const context = canvas.getContext("2d");
   if (context) {
-    context.font = `1.5rem Roboto Slab`;
+    context.font = `1.6rem Roboto Slab`;
 
     const textMetrics = context.measureText(word);
     return textMetrics.width;

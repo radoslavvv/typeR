@@ -53,18 +53,21 @@ const SettingsToolbar = () => {
     dispatch(setSecondsCount(newSecondsCount));
   };
 
-  const wordCountOptions: number[] = [5, 10, 25, 50, 100, 200];
+  const wordCountOptions: number[] = [15, 25, 50, 100];
 
-  const secondsOptions: number[] = [15, 30, 60, 120, 180];
+  const secondsOptions: number[] = [5, 15, 30, 60, 120];
 
-  return !writerIsRunning ? (
+  return (
     <div
-      className={`mx-auto flex w-auto animate-fadeIn select-none flex-col gap-4 self-center rounded-lg bg-darkBlue  py-2 text-lightGray transition-all duration-200 lg:flex-row lg:px-7`}
+      className={`mx-auto flex w-auto animate-fadeIn select-none flex-col gap-4 self-center rounded-lg bg-darkBlue  py-2 text-lightGray transition-all duration-200 lg:flex-row lg:px-7 ${
+        writerIsRunning ? "blur-[1px]" : ""
+      }`}
     >
       {(writerMode === WriterMode.WordCount ||
         writerMode === WriterMode.Time) && (
         <div className="flex justify-center gap-4 lg:px-0">
           <button
+            disabled={writerIsRunning}
             onClick={() =>
               dispatch(setPunctuationIsEnabled(!punctuationIsEnabled))
             }
@@ -76,6 +79,7 @@ const SettingsToolbar = () => {
             punctuation
           </button>
           <button
+            disabled={writerIsRunning}
             onClick={() => dispatch(setNumbersAreEnabled(!numbersAreEnabled))}
             className={`flex items-center justify-center duration-200 hover:text-customWhite ${
               numbersAreEnabled ? "text-lightBlue" : ""
@@ -94,6 +98,7 @@ const SettingsToolbar = () => {
 
       <div className="flex justify-center gap-4 px-20 lg:px-0">
         <button
+          disabled={writerIsRunning}
           className={`flex items-center justify-center gap-1 duration-200 hover:text-customWhite ${
             writerMode === WriterMode.Time ? "text-lightBlue" : ""
           }`}
@@ -103,6 +108,7 @@ const SettingsToolbar = () => {
           time
         </button>
         <button
+          disabled={writerIsRunning}
           onClick={() => handleWriterModeChange(WriterMode.WordCount)}
           className={` flex items-center justify-center gap-1 duration-200 hover:text-customWhite ${
             writerMode === WriterMode.WordCount ? "text-lightBlue" : ""
@@ -112,6 +118,7 @@ const SettingsToolbar = () => {
           words
         </button>
         <button
+          disabled={writerIsRunning}
           onClick={() => handleWriterModeChange(WriterMode.Quote)}
           className={` flex items-center justify-center gap-1 duration-200 hover:text-customWhite ${
             writerMode === WriterMode.Quote ? "text-lightBlue" : ""
@@ -132,6 +139,7 @@ const SettingsToolbar = () => {
           {wordCountOptions.map((option: number, i: number) => (
             <button
               key={option + i}
+              disabled={writerIsRunning}
               className={`duration-200 hover:text-customWhite ${
                 wordsCount === option ? "text-lightBlue" : ""
               }`}
@@ -148,6 +156,7 @@ const SettingsToolbar = () => {
           {secondsOptions.map((option: number, i: number) => (
             <button
               key={option + i}
+              disabled={writerIsRunning}
               className={`duration-200 hover:text-customWhite ${
                 secondsCount === option ? "text-lightBlue" : ""
               }`}
@@ -159,8 +168,6 @@ const SettingsToolbar = () => {
         </div>
       )}
     </div>
-  ) : (
-    <div className="h-10"></div>
   );
 };
 

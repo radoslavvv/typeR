@@ -31,45 +31,25 @@ import { MOST_FAMOUS_QUOTES } from "../utils/quotes";
 const useWriter = () => {
   const dispatch = useAppDispatch();
 
-  const writerMode: WriterMode = useSelector(
-    (state: RootState) => state.settings.writerMode,
-  );
-  const wordsCount: number = useSelector(
-    (state: RootState) => state.settings.wordsCount,
-  );
-  const punctuationIsEnabled: boolean = useSelector(
-    (state: RootState) => state.settings.punctuationIsEnabled,
-  );
-  const numbersAreEnabled: boolean = useSelector(
-    (state: RootState) => state.settings.numbersAreEnabled,
-  );
+  const {
+    writerMode,
+    wordsCount,
+    punctuationIsEnabled,
+    numbersAreEnabled,
+    secondsCount,
+  } = useSelector((state: RootState) => state.settings);
 
-  const writerIsRunning: boolean = useSelector(
-    (state: RootState) => state.words.isRunning,
-  );
-  const writerIsFinished: boolean = useSelector(
-    (state: RootState) => state.words.isFinished,
-  );
-  const cursorPosition: CursorPosition = useSelector(
-    (state: RootState) => state.words.cursorPosition,
-  );
+  const wordsState = useSelector((state: RootState) => state.words);
+  const {
+    words,
+    correctKeyStrokes,
+    wrongKeyStrokes,
+    isFinished,
+    isRunning,
+    cursorPosition,
+  } = wordsState;
 
-  const words: Word[] = useSelector((state: RootState) => state.words.words);
-
-  const correctKeyStrokes: number = useSelector(
-    (state: RootState) => state.words.correctKeyStrokes,
-  );
-  const wrongKeyStrokes: number = useSelector(
-    (state: RootState) => state.words.wrongKeyStrokes,
-  );
   const allKeyStrokes: number = correctKeyStrokes + wrongKeyStrokes;
-
-  // const writerStartTime: moment.Moment | null = useSelector(
-  //   (state: RootState) => state.words.startTime,
-  // );
-  // const writerEndTime: moment.Moment | null = useSelector(
-  //   (state: RootState) => state.words.endTime,
-  // );
 
   const getNewWordsAfterBackspacePress = (
     words: Word[],
@@ -180,14 +160,17 @@ const useWriter = () => {
         cursorPosition.allWordsIndex - 1,
       );
 
-      if (previousWordRowIndex < cursorPosition.rowIndex) {
-        newCursorPosition = new CursorPosition(
-          Math.max(cursorPosition.allWordsIndex - 1, 0),
-          Math.max(cursorPosition.currentRowWordIndex - 1, 0),
-          words[Math.max(cursorPosition.allWordsIndex - 1, 0)].letters.length,
-          previousWordRowIndex,
-        );
-      }
+      const newRowIndex: number =
+        previousWordRowIndex < cursorPosition.rowIndex
+          ? previousWordRowIndex
+          : cursorPosition.rowIndex;
+
+      newCursorPosition = new CursorPosition(
+        Math.max(cursorPosition.allWordsIndex - 1, 0),
+        Math.max(cursorPosition.currentRowWordIndex - 1, 0),
+        words[Math.max(cursorPosition.allWordsIndex - 1, 0)].letters.length,
+        newRowIndex,
+      );
     } else {
       newCursorPosition = new CursorPosition(
         cursorPosition.allWordsIndex,
@@ -215,7 +198,7 @@ const useWriter = () => {
     dispatch(setWords(newWords));
   };
   const handleTextKeyPress = (e: KeyboardEvent, keyIsUppercase: boolean) => {
-    if (!writerIsRunning) {
+    if (!isRunning) {
       dispatch(setIsRunning(true));
       dispatch(setIsFinished(false));
       dispatch(setStartTime(moment()));
@@ -279,7 +262,7 @@ const useWriter = () => {
       randomWords = getRandomQuote(MOST_FAMOUS_QUOTES);
     } else {
       const neededWordsCount: number =
-        writerMode === WriterMode.Time ? 999 : wordsCount;
+        writerMode === WriterMode.Time ? secondsCount * 3 : wordsCount;
 
       randomWords = getRandomWords(
         MOST_USED_WORDS,
@@ -295,14 +278,20 @@ const useWriter = () => {
   };
 
   React.useEffect(() => {
-    if (!writerIsRunning && words.length === 0) {
+    if (!isRunning && words.length === 0) {
       generateWords();
     }
-  }, [writerIsRunning, words]);
+  }, [isRunning, words]);
 
   React.useEffect(() => {
     generateWords();
-  }, [wordsCount, writerMode, punctuationIsEnabled, numbersAreEnabled]);
+  }, [
+    wordsCount,
+    writerMode,
+    punctuationIsEnabled,
+    numbersAreEnabled,
+    secondsCount,
+  ]);
 
   React.useEffect(() => {
     document.addEventListener("keydown", handleKeyPress);
@@ -324,8 +313,8 @@ const useWriter = () => {
     wrongKeyStrokes,
     allKeyStrokes,
     writerMode,
-    writerIsRunning,
-    writerIsFinished,
+    isRunning,
+    isFinished,
   };
 };
 

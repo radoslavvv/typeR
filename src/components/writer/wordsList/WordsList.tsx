@@ -78,7 +78,7 @@ const WordsList = ({ words }: IWordsListProps) => {
   return (
     <div
       ref={containerRef}
-      className="wordsList flex h-28 w-full flex-col content-baseline gap-2 overflow-hidden text-lightGray duration-300"
+      className="wordsList flex h-32 w-full flex-col content-baseline gap-2 overflow-hidden text-lightGray duration-300"
     >
       {rows}
     </div>

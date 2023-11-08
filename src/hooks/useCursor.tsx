@@ -44,7 +44,7 @@ const useCursor = () => {
     cursorLeft = leftValue;
   }
 
-  cursorTop += 5;
+  cursorTop += 7;
   cursorLeft -= 3;
 
   return { cursorTop, cursorLeft, cursorPosition };

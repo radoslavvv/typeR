@@ -18,7 +18,7 @@ const Word = ({ word, wordIndex, rowIndex }: IWordProps): JSX.Element => {
 
   return (
     <div
-      className={`word relative select-none text-2xl font-normal text-lightGray duration-300 ${
+      className={`word relative select-none text-[1.60rem] font-normal text-lightGray duration-300 ${
         cursorPosition.currentRowWordIndex === wordIndex &&
         cursorPosition.rowIndex === rowIndex
           ? "activeWord"
@@ -32,7 +32,8 @@ const Word = ({ word, wordIndex, rowIndex }: IWordProps): JSX.Element => {
           className={`border-1 border-solid duration-300 ${
             c.status === LetterStatus.Default
               ? "untyped"
-              : c.status === LetterStatus.Wrong
+              : c.status === LetterStatus.Wrong ||
+                c.status === LetterStatus.Skipped
               ? // ? "border-b-2 border-solid border-customRed text-customRed"
                 "border-b-2 border-solid border-customRed text-customRed"
               : "text-customWhite"
