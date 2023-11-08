@@ -1,5 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+
 import wordsSlice from "./features/WordsSlice";
 import settingsSlice from "./features/SettingsSlice";
 

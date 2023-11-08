@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
+import moment from "moment";
+import { useSelector } from "react-redux";
 
+import { RootState, useAppDispatch } from "../store/Store";
 import {
   setCorrectKeyStrokes,
   setCursorPosition,
@@ -11,22 +14,22 @@ import {
   setWords,
   setWrongKeyStrokes,
 } from "../store/features/WordsSlice";
-import LetterStatus from "../models/enums/LetterStatus";
+
 import Word from "../models/Word";
+import Letter from "../models/Letter";
+import WriterMode from "../models/enums/WriterMode";
 import CursorPosition from "../models/CursorPosition";
+import LetterStatus from "../models/enums/LetterStatus";
+
 import {
   getRandomQuote,
   getRandomWords,
   getWordRowIndex,
   hideFinishedRows,
 } from "../utils/Utilities";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../store/Store";
-import { MOST_USED_WORDS } from "../utils/words";
-import Letter from "../models/Letter";
-import WriterMode from "../models/enums/WriterMode";
-import moment from "moment";
-import { MOST_FAMOUS_QUOTES } from "../utils/quotes";
+
+import { MOST_USED_WORDS } from "../data/words";
+import { MOST_FAMOUS_QUOTES } from "../data/quotes";
 
 const useWriter = () => {
   const dispatch = useAppDispatch();

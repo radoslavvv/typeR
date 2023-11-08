@@ -1,9 +1,11 @@
-import { useSelector } from "react-redux";
-import WriterMode from "../../models/enums/WriterMode";
-import { RootState } from "../../store/Store";
 import moment from "moment";
+import { useSelector } from "react-redux";
+
+import { RootState } from "../../store/Store";
+
 import Word from "../../models/Word";
 import Letter from "../../models/Letter";
+import WriterMode from "../../models/enums/WriterMode";
 import LetterStatus from "../../models/enums/LetterStatus";
 
 function Results() {
@@ -13,13 +15,6 @@ function Results() {
   const wordsCount: number = useSelector(
     (state: RootState) => state.settings.wordsCount,
   );
-
-  // const punctuationIsEnabled: boolean = useSelector(
-  //   (state: RootState) => state.settings.punctuationIsEnabled,
-  // );
-  // const numbersAreEnabled: boolean = useSelector(
-  //   (state: RootState) => state.settings.numbersAreEnabled,
-  // );
 
   const writerStartTime: moment.Moment | null = useSelector(
     (state: RootState) => state.words.startTime,

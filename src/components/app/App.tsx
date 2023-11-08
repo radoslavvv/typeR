@@ -1,6 +1,6 @@
+import Main from "../layout/main/Main";
 import Footer from "../layout/footer/Footer";
 import Header from "../layout/header/Header";
-import Main from "../layout/main/Main";
 import Wrapper from "../layout/wrapper/Wrapper";
 
 import styles from "./App.module.scss";

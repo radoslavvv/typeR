@@ -1,5 +1,12 @@
-import WriterMode from "../../models/enums/WriterMode";
 import { useSelector } from "react-redux";
+import {
+  BsCCircleFill,
+  BsChatQuoteFill,
+  BsFillClockFill,
+  BsFillPencilFill,
+  BsHash,
+} from "react-icons/bs";
+
 import { RootState, useAppDispatch } from "../../store/Store";
 import {
   setNumbersAreEnabled,
@@ -8,13 +15,8 @@ import {
   setWordsCount,
   setWriterMode,
 } from "../../store/features/SettingsSlice";
-import {
-  BsCCircleFill,
-  BsChatQuoteFill,
-  BsFillClockFill,
-  BsFillPencilFill,
-  BsHash,
-} from "react-icons/bs";
+
+import WriterMode from "../../models/enums/WriterMode";
 
 const SettingsToolbar = () => {
   const dispatch = useAppDispatch();

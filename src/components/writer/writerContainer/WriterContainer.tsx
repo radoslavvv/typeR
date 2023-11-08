@@ -1,12 +1,14 @@
-import useWriter from "../../../hooks/useWriter";
-import WriterMode from "../../../models/enums/WriterMode";
-import WordCounter from "../../countdown/wordCounter/WordCounter";
-import SettingsToolbar from "../../settingsToolbar/SettingsToolbar";
 import Cursor from "../cursor/Cursor";
 import WordsList from "../wordsList/WordsList";
-import Word from "../../../models/Word";
-import ResetButton from "../resetButton/ResetButton";
 import Timer from "../../countdown/timer/Timer";
+import ResetButton from "../resetButton/ResetButton";
+import WordCounter from "../../countdown/wordCounter/WordCounter";
+import SettingsToolbar from "../../settingsToolbar/SettingsToolbar";
+
+import useWriter from "../../../hooks/useWriter";
+
+import Word from "../../../models/Word";
+import WriterMode from "../../../models/enums/WriterMode";
 
 const WriterContainer = () => {
   const { writerMode, words } = useWriter();

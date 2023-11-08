@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
+
 import { RootState } from "../../../store/Store";
-import WriterContainer from "../../writer/writerContainer/WriterContainer";
+
 import Results from "../../results/Results";
+import WriterContainer from "../../writer/writerContainer/WriterContainer";
 
 const Main = () => {
   const writerIsFinished: boolean = useSelector(

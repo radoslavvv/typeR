@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux";
-import CursorPosition from "../../../models/CursorPosition";
-import Letter from "../../../models/Letter";
-import LetterStatus from "../../../models/enums/LetterStatus";
-import WordModel from "../../../models/Word";
+
 import { RootState } from "../../../store/Store";
+
+import Letter from "../../../models/Letter";
+import WordModel from "../../../models/Word";
+import CursorPosition from "../../../models/CursorPosition";
+import LetterStatus from "../../../models/enums/LetterStatus";
 
 interface IWordProps {
   word: WordModel;

@@ -1,8 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
+import * as moment from "moment";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import Word from "../../models/Word";
 import CursorPosition from "../../models/CursorPosition";
-import * as moment from "moment";
 
 interface IWordsState {
   isStarted: boolean;

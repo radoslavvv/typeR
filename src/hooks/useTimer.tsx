@@ -1,13 +1,14 @@
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../store/Store";
 import React from "react";
+import moment from "moment";
+import { useSelector } from "react-redux";
+
+import { RootState, useAppDispatch } from "../store/Store";
 import {
   setEndTime,
   setIsFinished,
   setIsRunning,
   setRemainingSeconds,
 } from "../store/features/WordsSlice";
-import moment from "moment";
 
 const useTimer = () => {
   const dispatch = useAppDispatch();

@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
-import CursorPosition from "../../../models/CursorPosition";
+
 import { RootState } from "../../../store/Store";
+
 import Word from "../../../models/Word";
+import CursorPosition from "../../../models/CursorPosition";
 
 const WordCounter = () => {
   const cursorPosition: CursorPosition = useSelector(

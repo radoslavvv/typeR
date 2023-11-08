@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import Word from "../../models/Word";
 import CursorPosition from "../../models/CursorPosition";
 

@@ -1,6 +1,9 @@
 import React from "react";
+
 import Word from "../../../models/Word";
+
 import WordComponent from "../word/Word";
+
 import { getWordWidth } from "../../../utils/Utilities";
 
 interface IWordsListProps {
