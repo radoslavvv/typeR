@@ -1,27 +1,61 @@
-# React + TypeScript + Vite
+# typeR
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+(main text).
 
-Currently, two official plugins are available:
+<div align="center">
+  <kbd>
+    <img src="#" />
+  </kbd>
+</div>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
 
-## Expanding the ESLint configuration
+(description text)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Features
 
-- Configure the top-level `parserOptions` property like this:
+- (feature 1)
+- (feature 2)
+- (feature 3)
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+### Built with
+
+- Vite
+- TypeScript
+- Tailwind
+- React
+- Redux (Redux Toolkit)
+
+### Deployed with
+
+- [Netlify](#)
+
+## Getting started
+
+### Usage
+
+You can access the application [online](#) or clone it and run it locally.
+
+### Installation
+
+Once the PomoZoro repository is cloned:
+
+```
+cd pomozoro
+npm install
+npm start dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Back matter
+
+### Legal disclaimer
+
+Usage of this tool for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state, and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program.
+
+### Acknowledgements
+
+Special thanks to [MonkeyType](https://monkeytype.com/) - Their website was the main inspiration for the creation of this application.
+
+### License
+
+This project is licensed under the [MIT License](LICENSE.md).
