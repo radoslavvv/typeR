@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
-import wordsSlice from "./features/WordsSlice";
+import writerSlice from "./features/WriterSlice";
 import settingsSlice from "./features/SettingsSlice";
 
 const store = configureStore({
   reducer: {
-    words: wordsSlice.reducer,
+    writer: writerSlice.reducer,
     settings: settingsSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>

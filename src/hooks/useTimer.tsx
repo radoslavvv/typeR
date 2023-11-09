@@ -8,7 +8,7 @@ import {
   setIsFinished,
   setIsRunning,
   setRemainingSeconds,
-} from "../store/features/WordsSlice";
+} from "../store/features/WriterSlice";
 
 const useTimer = () => {
   const dispatch = useAppDispatch();
@@ -18,10 +18,10 @@ const useTimer = () => {
   );
 
   const writerIsRunning: boolean = useSelector(
-    (state: RootState) => state.words.isRunning,
+    (state: RootState) => state.writer.isRunning,
   );
   const seconds: number = useSelector(
-    (state: RootState) => state.words.remainingSeconds,
+    (state: RootState) => state.writer.remainingSeconds,
   );
 
   const updateTimer = () => {

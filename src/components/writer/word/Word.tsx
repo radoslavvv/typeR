@@ -15,7 +15,7 @@ interface IWordProps {
 
 const Word = ({ word, wordIndex, rowIndex }: IWordProps): JSX.Element => {
   const cursorPosition: CursorPosition = useSelector(
-    (state: RootState) => state.words.cursorPosition,
+    (state: RootState) => state.writer.cursorPosition,
   );
 
   return (
@@ -36,8 +36,7 @@ const Word = ({ word, wordIndex, rowIndex }: IWordProps): JSX.Element => {
               ? "untyped"
               : c.status === LetterStatus.Wrong ||
                 c.status === LetterStatus.Skipped
-              ? // ? "border-b-2 border-solid border-customRed text-customRed"
-                "border-b-2 border-solid border-customRed text-customRed"
+              ? "border-b-2 border-solid border-customRed text-customRed"
               : "text-customWhite"
           }`}
         >

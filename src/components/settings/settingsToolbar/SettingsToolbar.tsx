@@ -7,22 +7,23 @@ import {
   BsHash,
 } from "react-icons/bs";
 
-import { RootState, useAppDispatch } from "../../store/Store";
+import { RootState, useAppDispatch } from "../../../store/Store";
 import {
   setNumbersAreEnabled,
   setPunctuationIsEnabled,
   setSecondsCount,
   setWordsCount,
   setWriterMode,
-} from "../../store/features/SettingsSlice";
+} from "../../../store/features/SettingsSlice";
 
-import WriterMode from "../../models/enums/WriterMode";
+import WriterMode from "../../../models/enums/WriterMode";
 
 import {
   SECONDS_COUNT_OPTIONS,
   WORD_COUNT_OPTIONS,
-} from "../../utils/constants";
+} from "../../../utils/constants";
 import { motion } from "framer-motion";
+import SettingsButton from "../settingsButton/SettingsButton";
 
 const SettingsToolbar = () => {
   const dispatch = useAppDispatch();
@@ -46,7 +47,7 @@ const SettingsToolbar = () => {
   );
 
   const writerIsRunning: boolean = useSelector(
-    (state: RootState) => state.words.isRunning,
+    (state: RootState) => state.writer.isRunning,
   );
 
   const handleWriterModeChange = (newWriterMode: WriterMode) => {
@@ -73,28 +74,20 @@ const SettingsToolbar = () => {
       {(writerMode === WriterMode.WordCount ||
         writerMode === WriterMode.Time) && (
         <div className="flex justify-center gap-4 lg:px-0">
-          <button
-            disabled={writerIsRunning}
+          <SettingsButton
+            icon={<BsFillPencilFill />}
+            label="punctuation"
+            isActive={punctuationIsEnabled}
             onClick={() =>
               dispatch(setPunctuationIsEnabled(!punctuationIsEnabled))
             }
-            className={`flex items-center justify-center gap-1 duration-200 hover:text-customWhite ${
-              punctuationIsEnabled ? "text-lightBlue" : ""
-            }`}
-          >
-            <BsFillPencilFill />
-            punctuation
-          </button>
-          <button
-            disabled={writerIsRunning}
+          />
+          <SettingsButton
+            icon={<BsHash />}
+            label="numbers"
+            isActive={numbersAreEnabled}
             onClick={() => dispatch(setNumbersAreEnabled(!numbersAreEnabled))}
-            className={`flex items-center justify-center duration-200 hover:text-customWhite ${
-              numbersAreEnabled ? "text-lightBlue" : ""
-            }`}
-          >
-            <BsHash />
-            numbers
-          </button>
+          />
         </div>
       )}
 
@@ -104,36 +97,24 @@ const SettingsToolbar = () => {
       )}
 
       <div className="flex justify-center gap-4 px-20 lg:px-0">
-        <button
-          disabled={writerIsRunning}
-          className={`flex items-center justify-center gap-1 duration-200 hover:text-customWhite ${
-            writerMode === WriterMode.Time ? "text-lightBlue" : ""
-          }`}
+        <SettingsButton
+          icon={<BsFillClockFill />}
+          label="time"
+          isActive={writerMode === WriterMode.Time}
           onClick={() => handleWriterModeChange(WriterMode.Time)}
-        >
-          <BsFillClockFill />
-          time
-        </button>
-        <button
-          disabled={writerIsRunning}
+        />
+        <SettingsButton
+          icon={<BsCCircleFill />}
+          label="words"
+          isActive={writerMode === WriterMode.WordCount}
           onClick={() => handleWriterModeChange(WriterMode.WordCount)}
-          className={` flex items-center justify-center gap-1 duration-200 hover:text-customWhite ${
-            writerMode === WriterMode.WordCount ? "text-lightBlue" : ""
-          }`}
-        >
-          <BsCCircleFill />
-          words
-        </button>
-        <button
-          disabled={writerIsRunning}
+        />
+        <SettingsButton
+          icon={<BsChatQuoteFill />}
+          label="quote"
+          isActive={writerMode === WriterMode.Quote}
           onClick={() => handleWriterModeChange(WriterMode.Quote)}
-          className={` flex items-center justify-center gap-1 duration-200 hover:text-customWhite ${
-            writerMode === WriterMode.Quote ? "text-lightBlue" : ""
-          }`}
-        >
-          <BsChatQuoteFill />
-          quote
-        </button>
+        />
       </div>
 
       {(writerMode === WriterMode.WordCount ||
@@ -144,16 +125,12 @@ const SettingsToolbar = () => {
       {writerMode === WriterMode.WordCount && (
         <div className="flex justify-center gap-4 px-7 lg:px-0">
           {WORD_COUNT_OPTIONS.map((option: number, i: number) => (
-            <button
+            <SettingsButton
               key={option + i}
-              disabled={writerIsRunning}
-              className={`duration-200 hover:text-customWhite ${
-                wordsCount === option ? "text-lightBlue" : ""
-              }`}
+              label={option.toString()}
+              isActive={wordsCount === option}
               onClick={() => handleWordCountChange(option)}
-            >
-              {option}
-            </button>
+            />
           ))}
         </div>
       )}
@@ -161,16 +138,12 @@ const SettingsToolbar = () => {
       {writerMode === WriterMode.Time && (
         <div className="flex justify-center gap-4 lg:px-0">
           {SECONDS_COUNT_OPTIONS.map((option: number, i: number) => (
-            <button
+            <SettingsButton
               key={option + i}
-              disabled={writerIsRunning}
-              className={`duration-200 hover:text-customWhite ${
-                secondsCount === option ? "text-lightBlue" : ""
-              }`}
+              label={option.toString()}
+              isActive={secondsCount === option}
               onClick={() => handleSecondsCountChange(option)}
-            >
-              {option}
-            </button>
+            />
           ))}
         </div>
       )}

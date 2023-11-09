@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { BsFillKeyboardFill } from "react-icons/bs";
 
 import { useAppDispatch } from "../../../store/Store";
-import { reset } from "../../../store/features/WordsSlice";
+import { reset } from "../../../store/features/WriterSlice";
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -14,8 +14,8 @@ const Header = () => {
   return (
     <motion.header
       className="select-none py-7 text-3xl font-medium text-customWhite"
-      initial={{ opacity: 0, translateY: "-250px" }}
-      animate={{ opacity: 1, translateY: "0px" }}
+      initial={{ opacity: 0, translateY: 250 }}
+      animate={{ opacity: 1, translateY: 0 }}
       transition={{ duration: 0.5 }}
     >
       <div

@@ -46,8 +46,8 @@ const initialState: IWordsState = {
   wrongKeyStrokes: 0,
 };
 
-export const WordsSlice = createSlice({
-  name: "words",
+export const WriterSlice = createSlice({
+  name: "writer",
   initialState,
   reducers: {
     setWords: (state, action: PayloadAction<Word[]>) => {
@@ -141,6 +141,6 @@ export const {
   reset,
   start,
   end,
-} = WordsSlice.actions;
+} = WriterSlice.actions;
 
-export default WordsSlice;
+export default WriterSlice;

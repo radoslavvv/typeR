@@ -1,7 +1,7 @@
 import { BsArrowClockwise } from "react-icons/bs";
 
 import { useAppDispatch } from "../../../store/Store";
-import { reset } from "../../../store/features/WordsSlice";
+import { reset } from "../../../store/features/WriterSlice";
 import { motion } from "framer-motion";
 
 const ResetButton = () => {

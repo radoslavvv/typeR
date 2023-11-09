@@ -8,11 +8,12 @@ import Letter from "../../models/Letter";
 import WriterMode from "../../models/enums/WriterMode";
 import LetterStatus from "../../models/enums/LetterStatus";
 
-import { SECONDS_IN_MINUTE } from "../../utils/constants";
 import ResultsChart from "./resultsChart/ResultsChart";
 import KeyStrokePerSecond from "../../models/KeyStrokesPerSecond";
 import StatisticsItem from "../../models/StatisticsItem";
 import ResetButton from "../writer/resetButton/ResetButton";
+
+import { generateStatisticsItems } from "../../utils/Utilities";
 
 function Results() {
   const writerMode: WriterMode = useSelector(
@@ -23,20 +24,20 @@ function Results() {
   );
 
   const writerStartTime: moment.Moment | null = useSelector(
-    (state: RootState) => state.words.startTime,
+    (state: RootState) => state.writer.startTime,
   );
   const writerEndTime: moment.Moment | null = useSelector(
-    (state: RootState) => state.words.endTime,
+    (state: RootState) => state.writer.endTime,
   );
   const timePassedInSeconds: number = Math.floor(
     moment.duration(writerEndTime?.diff(writerStartTime)).asSeconds(),
   );
 
   const correctKeyStrokes: number = useSelector(
-    (state: RootState) => state.words.correctKeyStrokes,
+    (state: RootState) => state.writer.correctKeyStrokes,
   );
   const wrongKeyStrokes: number = useSelector(
-    (state: RootState) => state.words.wrongKeyStrokes,
+    (state: RootState) => state.writer.wrongKeyStrokes,
   );
   const allKeyStrokes: number = correctKeyStrokes + wrongKeyStrokes;
 
@@ -45,35 +46,11 @@ function Results() {
   );
 
   const keyStrokesPerSecond: KeyStrokePerSecond[] = useSelector(
-    (state: RootState) => state.words.keyStrokesPerSecond,
+    (state: RootState) => state.writer.keyStrokesPerSecond,
   );
 
-  const generateStatisticsItems = (): StatisticsItem[] => {
-    const statisticsItems: StatisticsItem[] = [];
-
-    for (let i = 0; i < keyStrokesPerSecond.length; i++) {
-      const current: KeyStrokePerSecond = keyStrokesPerSecond[i];
-
-      if (current.second === 0) {
-        continue;
-      }
-
-      const wordsPerMinute: number = Math.floor(
-        current.keyStrokes / 5 / (current.second / SECONDS_IN_MINUTE),
-      );
-
-      const newStatisticsItem: StatisticsItem = new StatisticsItem(
-        wordsPerMinute,
-        current.second,
-      );
-
-      statisticsItems.push(newStatisticsItem);
-    }
-
-    return statisticsItems;
-  };
-
-  const statisticsData: StatisticsItem[] = generateStatisticsItems();
+  const statisticsData: StatisticsItem[] =
+    generateStatisticsItems(keyStrokesPerSecond);
 
   const wordsPerMinute: number = Math.floor(
     statisticsData.reduce(function (sum: number, item: StatisticsItem) {
@@ -85,7 +62,7 @@ function Results() {
     (correctKeyStrokes / allKeyStrokes) * 100,
   );
 
-  const words: Word[] = useSelector((state: RootState) => state.words.words);
+  const words: Word[] = useSelector((state: RootState) => state.writer.words);
   const correctWords: Word[] = words.filter(
     (w: Word) =>
       !w.letters.some((l: Letter) => l.status === LetterStatus.Wrong),

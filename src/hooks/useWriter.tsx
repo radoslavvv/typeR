@@ -14,7 +14,7 @@ import {
   setStartTime,
   setWords,
   setWrongKeyStrokes,
-} from "../store/features/WordsSlice";
+} from "../store/features/WriterSlice";
 
 import Word from "../models/Word";
 import Letter from "../models/Letter";
@@ -45,7 +45,6 @@ const useWriter = () => {
     secondsCount,
   } = useSelector((state: RootState) => state.settings);
 
-  const wordsState = useSelector((state: RootState) => state.words);
   const {
     words,
     correctKeyStrokes,
@@ -55,7 +54,7 @@ const useWriter = () => {
     cursorPosition,
     statisticsSeconds,
     keyStrokesPerSecond,
-  } = wordsState;
+  } = useSelector((state: RootState) => state.writer);
 
   const allKeyStrokes: number = correctKeyStrokes + wrongKeyStrokes;
 

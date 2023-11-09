@@ -9,11 +9,14 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import StatisticsItem from "../../../models/StatisticsItem";
-import { RootState } from "../../../store/Store";
 import { useSelector } from "react-redux";
+
+import { RootState } from "../../../store/Store";
+
+import StatisticsItem from "../../../models/StatisticsItem";
 import KeyStrokePerSecond from "../../../models/KeyStrokesPerSecond";
-import { SECONDS_IN_MINUTE } from "../../../utils/constants";
+
+import { generateStatisticsItems } from "../../../utils/Utilities";
 
 ChartJS.register(
   CategoryScale,
@@ -25,51 +28,25 @@ ChartJS.register(
   Legend,
 );
 
+const plugin = {
+  id: "customCanvasBackgroundColor",
+  beforeDraw: (chart, args, options) => {
+    const { ctx } = chart;
+    ctx.save();
+    ctx.globalCompositeOperation = "destination-over";
+    ctx.fillStyle = options.color || "#99ffff";
+    ctx.fillRect(0, 0, chart.width, chart.height);
+    ctx.restore();
+  },
+};
+
 function ResultsChart() {
   const keyStrokesPerSecond: KeyStrokePerSecond[] = useSelector(
-    (state: RootState) => state.words.keyStrokesPerSecond,
+    (state: RootState) => state.writer.keyStrokesPerSecond,
   );
 
-  console.log(keyStrokesPerSecond);
-
-  const plugin = {
-    id: "customCanvasBackgroundColor",
-    beforeDraw: (chart, args, options) => {
-      const { ctx } = chart;
-      ctx.save();
-      ctx.globalCompositeOperation = "destination-over";
-      ctx.fillStyle = options.color || "#99ffff";
-      ctx.fillRect(0, 0, chart.width, chart.height);
-      ctx.restore();
-    },
-  };
-
-  const generateStatisticsItems = (): StatisticsItem[] => {
-    const statisticsItems: StatisticsItem[] = [];
-
-    for (let i = 0; i < keyStrokesPerSecond.length; i++) {
-      const current: KeyStrokePerSecond = keyStrokesPerSecond[i];
-
-      if (current.second === 0) {
-        continue;
-      }
-
-      const wordsPerMinute: number = Math.floor(
-        current.keyStrokes / 5 / (current.second / SECONDS_IN_MINUTE),
-      );
-
-      const newStatisticsItem: StatisticsItem = new StatisticsItem(
-        wordsPerMinute,
-        current.second,
-      );
-
-      statisticsItems.push(newStatisticsItem);
-    }
-
-    return statisticsItems;
-  };
-
-  const statisticsData: StatisticsItem[] = generateStatisticsItems();
+  const statisticsData: StatisticsItem[] =
+    generateStatisticsItems(keyStrokesPerSecond);
 
   const labels: number[] = [
     ...statisticsData.map((s: StatisticsItem) => s.second),

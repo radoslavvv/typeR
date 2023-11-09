@@ -7,10 +7,10 @@ import CursorPosition from "../../../models/CursorPosition";
 
 const WordCounter = () => {
   const cursorPosition: CursorPosition = useSelector(
-    (state: RootState) => state.words.cursorPosition,
+    (state: RootState) => state.writer.cursorPosition,
   );
 
-  const words: Word[] = useSelector((state: RootState) => state.words.words);
+  const words: Word[] = useSelector((state: RootState) => state.writer.words);
 
   return (
     <div className="mb-1 select-none text-2xl text-lightBlue">

@@ -11,7 +11,7 @@ import {
 
 const useCursor = () => {
   const cursorPosition: CursorPosition = useSelector(
-    (state: RootState) => state.words.cursorPosition,
+    (state: RootState) => state.writer.cursorPosition,
   );
 
   const wordsListElement: Element = document.querySelectorAll(".wordsList")[0];

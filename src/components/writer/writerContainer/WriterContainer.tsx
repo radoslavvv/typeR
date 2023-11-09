@@ -3,7 +3,7 @@ import WordsList from "../wordsList/WordsList";
 import Timer from "../../countdown/timer/Timer";
 import ResetButton from "../resetButton/ResetButton";
 import WordCounter from "../../countdown/wordCounter/WordCounter";
-import SettingsToolbar from "../../settingsToolbar/SettingsToolbar";
+import SettingsToolbar from "../../settings/settingsToolbar/SettingsToolbar";
 
 import useWriter from "../../../hooks/useWriter";
 
@@ -19,6 +19,7 @@ const WriterContainer = () => {
   return (
     <>
       <SettingsToolbar />
+
       <motion.div
         key={JSON.stringify(rawWords)}
         className="mt-20 flex flex-col justify-start md:mt-52"

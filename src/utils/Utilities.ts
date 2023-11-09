@@ -1,3 +1,7 @@
+import KeyStrokePerSecond from "../models/KeyStrokesPerSecond";
+import StatisticsItem from "../models/StatisticsItem";
+import { SECONDS_IN_MINUTE } from "./constants";
+
 export const getRandomWords = (
   wordsArray: string[],
   wordsCount: number,
@@ -166,4 +170,31 @@ export const hideFinishedRows = (currentRowIndex: number): void => {
   for (let i = currentRowIndex - 2; i < currentRowIndex - 1; i++) {
     rowElements[i].style.display = "none";
   }
+};
+
+export const generateStatisticsItems = (
+  keyStrokesPerSecond: KeyStrokePerSecond[],
+): StatisticsItem[] => {
+  const statisticsItems: StatisticsItem[] = [];
+
+  for (let i = 0; i < keyStrokesPerSecond.length; i++) {
+    const current: KeyStrokePerSecond = keyStrokesPerSecond[i];
+
+    if (current.second === 0) {
+      continue;
+    }
+
+    const wordsPerMinute: number = Math.floor(
+      current.keyStrokes / 5 / (current.second / SECONDS_IN_MINUTE),
+    );
+
+    const newStatisticsItem: StatisticsItem = new StatisticsItem(
+      wordsPerMinute,
+      current.second,
+    );
+
+    statisticsItems.push(newStatisticsItem);
+  }
+
+  return statisticsItems;
 };
