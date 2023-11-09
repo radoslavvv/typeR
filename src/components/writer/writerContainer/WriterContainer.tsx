@@ -9,6 +9,7 @@ import useWriter from "../../../hooks/useWriter";
 
 import Word from "../../../models/Word";
 import WriterMode from "../../../models/enums/WriterMode";
+import { motion } from "framer-motion";
 
 const WriterContainer = () => {
   const { writerMode, words } = useWriter();
@@ -18,10 +19,12 @@ const WriterContainer = () => {
   return (
     <>
       <SettingsToolbar />
-      <div
+      <motion.div
         key={JSON.stringify(rawWords)}
-        className="mt-20 flex animate-fadeIn flex-col justify-start opacity-0 md:mt-52"
-        style={{ animationDelay: "0.7s" }}
+        className="mt-20 flex flex-col justify-start md:mt-52"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3, delay: 0.75 }}
       >
         {(writerMode === WriterMode.WordCount ||
           writerMode === WriterMode.Quote) && <WordCounter />}
@@ -29,7 +32,7 @@ const WriterContainer = () => {
 
         <WordsList words={words} />
         <Cursor />
-      </div>
+      </motion.div>
 
       <ResetButton />
     </>

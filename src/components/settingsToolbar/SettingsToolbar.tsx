@@ -22,6 +22,7 @@ import {
   SECONDS_COUNT_OPTIONS,
   WORD_COUNT_OPTIONS,
 } from "../../utils/constants";
+import { motion } from "framer-motion";
 
 const SettingsToolbar = () => {
   const dispatch = useAppDispatch();
@@ -61,11 +62,13 @@ const SettingsToolbar = () => {
   };
 
   return (
-    <div
-      className={`animate-slideLeft mx-auto flex w-auto animate-fadeIn select-none flex-col gap-4 self-center rounded-lg bg-darkBlue py-2  text-lightGray opacity-0 transition-all duration-200 lg:flex-row lg:px-7 ${
+    <motion.div
+      className={` mx-auto flex w-auto select-none flex-col gap-4 self-center rounded-lg bg-darkBlue py-2  text-lightGray lg:flex-row lg:px-7 ${
         writerIsRunning ? "blur-[1px]" : ""
       }`}
-      style={{ animationDelay: "0.5s" }}
+      initial={{ opacity: 0, translateX: "-250px" }}
+      animate={{ opacity: 1, translateX: "0px" }}
+      transition={{ duration: 0.5, delay: 0.5 }}
     >
       {(writerMode === WriterMode.WordCount ||
         writerMode === WriterMode.Time) && (
@@ -171,7 +174,7 @@ const SettingsToolbar = () => {
           ))}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
