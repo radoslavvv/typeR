@@ -17,7 +17,8 @@ export default {
         lightGray: "#4b5975",
         customWhite: "#ccccb5",
         customRed: "#a61717",
-        black: "#151920",
+        customGreen: "#008000",
+        customBlack: "#151920",
       },
       fontFamily: {
         sans: ["Graphik", "sans-serif"],

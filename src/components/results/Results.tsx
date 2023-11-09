@@ -1,4 +1,5 @@
 import moment from "moment";
+import { Tooltip } from "react-tooltip";
 import { useSelector } from "react-redux";
 
 import { RootState } from "../../store/Store";
@@ -101,8 +102,8 @@ function Results() {
   return (
     <>
       <div className="flex select-none flex-col justify-start">
-        <div className="flex flex-row">
-          <div>
+        <div className="flex flex-col gap-5 lg:flex-row">
+          <div className="flex flex-row justify-center gap-5 lg:flex-col">
             <div>
               <p className="text-3xl text-lightGray">wpm</p>
               <p className="text-7xl text-lightBlue">{wordsPerMinute}</p>
@@ -112,34 +113,58 @@ function Results() {
               <p className="text-7xl text-lightBlue">{accuracy}%</p>
             </div>
           </div>
-          <div className="h-56 flex-1">
+          <div className="h-56 flex-1 rounded border border-solid border-lightBlue p-3">
             <ResultsChart />
           </div>
         </div>
         <div className="mt-5 flex flex-row justify-evenly">
-          <div className="flex flex-col">
+          <div
+            className="flex flex-col"
+            data-tooltip-id="results-tooltip"
+            data-tooltip-content={`selected test type: ${getTestType()}`}
+          >
             <p className="text-l text-lightGray">test type</p>
             <p className="text-2xl text-lightBlue">{getTestType()}</p>
           </div>
           <div className="flex flex-col">
             <p className="text-l text-lightGray">words</p>
-            <p className="text-2xl text-lightBlue">
+            <p
+              className="text-2xl text-lightBlue"
+              data-tooltip-id="results-tooltip"
+              data-tooltip-content={`total: ${words.length} (correct: ${correctWords.length} / wrong: ${wrongWords.length})`}
+            >
               {words.length} ({correctWords.length}/{wrongWords.length})
             </p>
           </div>
           <div className="flex flex-col">
             <p className="text-l text-lightGray">characters</p>
-            <p className="text-2xl text-lightBlue">
+            <p
+              className="text-2xl text-lightBlue"
+              data-tooltip-id="results-tooltip"
+              data-tooltip-content={`total: ${allKeyStrokes} (correct: ${correctKeyStrokes} / wrong: ${wrongKeyStrokes})`}
+            >
               {allKeyStrokes} ({correctKeyStrokes}/{wrongKeyStrokes})
             </p>
           </div>
-          <div className="flex flex-col">
+          <div
+            className="flex flex-col"
+            data-tooltip-id="results-tooltip"
+            data-tooltip-content={`time spent on test: ${getTime()}`}
+          >
             <p className="text-l text-lightGray">time</p>
             <p className="text-2xl text-lightBlue">{getTime()}</p>
           </div>
         </div>
       </div>
       <ResetButton />
+      <Tooltip
+        id="results-tooltip"
+        place="bottom"
+        style={{
+          background: "#151920",
+          color: "#23a9d5",
+        }}
+      />
     </>
   );
 }

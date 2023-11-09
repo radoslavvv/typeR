@@ -84,7 +84,7 @@ function ResultsChart() {
     },
   };
 
-  return <Line options={options} data={data} plugins={[plugin]} />;
+  return <Line options={options} data={data} />;
 }
 
 export default ResultsChart;
