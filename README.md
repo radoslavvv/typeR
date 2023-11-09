@@ -4,7 +4,7 @@ typeR is a web application dedicated to improving your typing skills. Whether yo
 
 <div align="center">
   <kbd>
-    <img src="https://imgur.com/a/PdkcrEF" />
+    <img src="https://i.imgur.com/fv1Kdi6.png" />
   </kbd>
 </div>
 
