@@ -30,7 +30,7 @@ ChartJS.register(
 
 const plugin = {
   id: "customCanvasBackgroundColor",
-  beforeDraw: (chart, args, options) => {
+  beforeDraw: (chart, _args, options) => {
     const { ctx } = chart;
     ctx.save();
     ctx.globalCompositeOperation = "destination-over";
