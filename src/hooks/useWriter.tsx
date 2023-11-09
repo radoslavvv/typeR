@@ -10,6 +10,7 @@ import {
   setEndTime,
   setIsFinished,
   setIsRunning,
+  setKeyStrokesPerSecond,
   setStartTime,
   setWords,
   setWrongKeyStrokes,
@@ -31,6 +32,7 @@ import {
 import { MOST_USED_WORDS } from "../data/words";
 import { MOST_FAMOUS_QUOTES } from "../data/quotes";
 import { WORDS_PER_SECOND_MULTIPLIER } from "../utils/constants";
+import KeyStrokePerSecond from "../models/KeyStrokesPerSecond";
 
 const useWriter = () => {
   const dispatch = useAppDispatch();
@@ -51,6 +53,8 @@ const useWriter = () => {
     isFinished,
     isRunning,
     cursorPosition,
+    statisticsSeconds,
+    keyStrokesPerSecond,
   } = wordsState;
 
   const allKeyStrokes: number = correctKeyStrokes + wrongKeyStrokes;
@@ -298,6 +302,21 @@ const useWriter = () => {
     numbersAreEnabled,
     secondsCount,
   ]);
+
+  React.useEffect(() => {
+    const currentKeyStrokesPerSecond: KeyStrokePerSecond =
+      new KeyStrokePerSecond(
+        correctKeyStrokes + wrongKeyStrokes,
+        statisticsSeconds,
+      );
+    if (
+      !keyStrokesPerSecond.some(
+        (kps: KeyStrokePerSecond) => kps.second === statisticsSeconds,
+      )
+    ) {
+      dispatch(setKeyStrokesPerSecond(currentKeyStrokesPerSecond));
+    }
+  }, [correctKeyStrokes, wrongKeyStrokes]);
 
   React.useEffect(() => {
     document.addEventListener("keydown", handleKeyPress);

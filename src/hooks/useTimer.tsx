@@ -30,12 +30,14 @@ const useTimer = () => {
 
   React.useEffect(() => {
     if (writerIsRunning) {
-      updateTimer();
+      setTimeout(() => {
+        updateTimer();
+      }, 1000);
     }
   }, [writerIsRunning]);
 
   React.useEffect(() => {
-    if (writerIsRunning && seconds > 0) {
+    if (writerIsRunning && seconds >= 0) {
       setTimeout(() => {
         updateTimer();
       }, 1000);

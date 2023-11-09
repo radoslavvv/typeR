@@ -18,7 +18,6 @@ const WriterContainer = () => {
   return (
     <>
       <SettingsToolbar />
-
       <div
         key={JSON.stringify(rawWords)}
         className="mt-20 flex animate-fadeIn flex-col justify-start opacity-0 md:mt-52"

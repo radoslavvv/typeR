@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import Word from "../../models/Word";
 import CursorPosition from "../../models/CursorPosition";
+import KeyStrokePerSecond from "../../models/KeyStrokesPerSecond";
 
 interface IWordsState {
   isStarted: boolean;
@@ -15,6 +16,9 @@ interface IWordsState {
 
   words: Word[];
   cursorPosition: CursorPosition;
+
+  keyStrokesPerSecond: KeyStrokePerSecond[];
+  statisticsSeconds: number;
 
   remainingSeconds: number;
 
@@ -32,6 +36,9 @@ const initialState: IWordsState = {
 
   words: [],
   cursorPosition: new CursorPosition(0, 0, 0, 0),
+
+  keyStrokesPerSecond: [],
+  statisticsSeconds: 0,
 
   remainingSeconds: 60,
 
@@ -54,11 +61,23 @@ export const WordsSlice = createSlice({
         action.payload[3],
       );
     },
+    setStatisticsSeconds: (state, action: PayloadAction<number>) => {
+      state.statisticsSeconds = action.payload;
+    },
     setCorrectKeyStrokes: (state, action: PayloadAction<number>) => {
       state.correctKeyStrokes = action.payload;
     },
     setWrongKeyStrokes: (state, action: PayloadAction<number>) => {
       state.wrongKeyStrokes = action.payload;
+    },
+    setKeyStrokesPerSecond: (
+      state,
+      action: PayloadAction<KeyStrokePerSecond>,
+    ) => {
+      state.keyStrokesPerSecond = [
+        ...state.keyStrokesPerSecond,
+        action.payload,
+      ];
     },
     setIsRunning: (state, action: PayloadAction<boolean>) => {
       state.isRunning = action.payload;
@@ -88,6 +107,8 @@ export const WordsSlice = createSlice({
       state.words = [];
 
       state.remainingSeconds = 60;
+      state.keyStrokesPerSecond = [];
+      state.statisticsSeconds = 0;
 
       state.correctKeyStrokes = 0;
       state.wrongKeyStrokes = 0;
@@ -108,8 +129,10 @@ export const WordsSlice = createSlice({
 export const {
   setWords,
   setCursorPosition,
+  setStatisticsSeconds,
   setCorrectKeyStrokes,
   setWrongKeyStrokes,
+  setKeyStrokesPerSecond,
   setIsRunning,
   setIsFinished,
   setStartTime,
