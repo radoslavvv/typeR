@@ -17,7 +17,10 @@ const WordsList = ({ words }: IWordsListProps) => {
   React.useLayoutEffect(() => {
     const generateRows = (): void => {
       const generatedRows: JSX.Element[] = [];
-      const maxRowWidth: number = containerRef?.current?.clientWidth || 1120;
+      const maxRowWidth: number = Math.min(
+        containerRef?.current?.clientWidth || 0,
+        window.screen.width,
+      );
 
       let currentRow: Word[] = [];
       let currentRowWidth: number = 0;
@@ -25,12 +28,7 @@ const WordsList = ({ words }: IWordsListProps) => {
       words.forEach((word: Word, wi: number) => {
         const wordWidth: number = getWordWidth(word.content);
 
-        console.log(word.content);
-        console.log(wordWidth);
-        console.log(currentRowWidth);
-        console.log(currentRowWidth + wordWidth <= maxRowWidth - 50);
-
-        if (currentRowWidth + wordWidth <= maxRowWidth - 50) {
+        if (currentRowWidth + wordWidth <= maxRowWidth) {
           currentRow.push(word);
           currentRowWidth += wordWidth;
           currentRowWidth += 8;
@@ -82,7 +80,7 @@ const WordsList = ({ words }: IWordsListProps) => {
 
     setTimeout(() => {
       generateRows();
-    }, 4000);
+    }, 1000);
   }, []);
 
   return (

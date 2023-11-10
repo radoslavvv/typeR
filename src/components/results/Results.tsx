@@ -117,7 +117,7 @@ function Results() {
             <ResultsChart />
           </div>
         </div>
-        <div className="mt-5 flex flex-row justify-evenly">
+        <div className="mt-5 flex flex-col items-center justify-center lg:flex-row lg:justify-evenly">
           <div
             className="flex flex-col"
             data-tooltip-id="results-tooltip"
