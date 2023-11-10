@@ -14,10 +14,10 @@ const WordsList = ({ words }: IWordsListProps) => {
   const [rows, setRows] = React.useState<JSX.Element[]>([]);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const generateRows = (): void => {
       const generatedRows: JSX.Element[] = [];
-      const maxRowWidth: number = containerRef?.current?.clientWidth || 0;
+      const maxRowWidth: number = containerRef?.current?.clientWidth || 1120;
 
       let currentRow: Word[] = [];
       let currentRowWidth: number = 0;
@@ -25,7 +25,12 @@ const WordsList = ({ words }: IWordsListProps) => {
       words.forEach((word: Word, wi: number) => {
         const wordWidth: number = getWordWidth(word.content);
 
-        if (currentRowWidth + wordWidth <= maxRowWidth) {
+        console.log(word.content);
+        console.log(wordWidth);
+        console.log(currentRowWidth);
+        console.log(currentRowWidth + wordWidth <= maxRowWidth - 50);
+
+        if (currentRowWidth + wordWidth <= maxRowWidth - 50) {
           currentRow.push(word);
           currentRowWidth += wordWidth;
           currentRowWidth += 8;
@@ -75,13 +80,15 @@ const WordsList = ({ words }: IWordsListProps) => {
       return rowJSX;
     };
 
-    generateRows();
+    setTimeout(() => {
+      generateRows();
+    }, 1000);
   }, []);
 
   return (
     <div
       ref={containerRef}
-      className="wordsList flex h-32 w-full flex-col content-baseline gap-2 overflow-hidden text-lightGray duration-300"
+      className="wordsList flex h-32 w-full  flex-col content-baseline gap-2 overflow-hidden text-lightGray duration-300"
     >
       {rows}
     </div>

@@ -22,7 +22,7 @@ const WriterContainer = () => {
 
       <motion.div
         key={JSON.stringify(rawWords)}
-        className="mt-20 flex flex-col justify-start md:mt-52"
+        className="mt-20 flex max-w-[100%] flex-col justify-start md:mt-52"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, delay: 0.75 }}

@@ -64,7 +64,7 @@ const SettingsToolbar = () => {
 
   return (
     <motion.div
-      className={` mx-auto flex w-auto select-none flex-col gap-4 self-center rounded-lg bg-darkBlue py-2  text-lightGray lg:flex-row lg:px-7 ${
+      className={`mx-auto flex w-auto max-w-[80vw] select-none flex-col gap-4 self-center rounded-lg bg-darkBlue  py-2 text-lightGray lg:flex-row lg:px-7 ${
         writerIsRunning ? "blur-[1px]" : ""
       }`}
       initial={{ opacity: 0, translateX: "-250px" }}
