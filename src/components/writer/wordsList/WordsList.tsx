@@ -82,7 +82,7 @@ const WordsList = ({ words }: IWordsListProps) => {
 
     setTimeout(() => {
       generateRows();
-    }, 1000);
+    }, 4000);
   }, []);
 
   return (
